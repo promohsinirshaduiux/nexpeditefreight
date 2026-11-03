@@ -7,9 +7,9 @@ import { ArrowRight, ChevronDown, Menu, Plus, X } from "lucide-react";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Logo } from "@/components/ui/primitives";
 import { ChannelIcon } from "@/components/ui/SocialIcon";
-import { contactLinks, resourceLinks, serviceLinks, site, type NavLink } from "@/data/site";
+import { resourceLinks, serviceLinks, site, type NavLink } from "@/data/site";
 
-type MenuKey = "services" | "resources" | "contact";
+type MenuKey = "services" | "resources";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -81,9 +81,7 @@ export function Header() {
               >
                 <SimplePanel links={resourceLinks} onNavigate={() => setOpen(null)} />
               </Dropdown>
-              <Dropdown id="contact" label="Contact Us" active={isActive("/contact")} open={open === "contact"} setOpen={setOpen} align="right">
-                <ContactPanel onNavigate={() => setOpen(null)} />
-              </Dropdown>
+              <NavItem href="/contact" label="Contact Us" active={isActive("/contact")} />
             </ul>
           </nav>
 
@@ -273,49 +271,6 @@ function SimplePanel({ links, onNavigate }: { links: NavLink[]; onNavigate: () =
   );
 }
 
-function ContactPanel({ onNavigate }: { onNavigate: () => void }) {
-  const links = contactLinks();
-  return (
-    <div className="w-[320px]">
-      <ul className="p-2">
-        {links.map((l) => {
-          const inner = (
-            <>
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-md border border-line text-blue transition-colors group-hover:border-blue/30 group-hover:bg-white">
-                <ChannelIcon name={l.icon} />
-              </span>
-              <span className="min-w-0">
-                <span className="block text-[0.9375rem] font-medium text-ink">{l.label}</span>
-                {l.description && <span className="block truncate text-[0.8125rem] text-muted">{l.description}</span>}
-              </span>
-            </>
-          );
-          const cls = "group flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-off";
-          return (
-            <li key={l.label}>
-              {l.external ? (
-                <a
-                  href={l.href}
-                  onClick={onNavigate}
-                  className={cls}
-                  {...(l.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                >
-                  {inner}
-                </a>
-              ) : (
-                <Link href={l.href} onClick={onNavigate} className={cls}>
-                  {inner}
-                </Link>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-      <p className="border-t border-line bg-off px-5 py-3 text-[0.8125rem] text-muted">{site.tagline}</p>
-    </div>
-  );
-}
-
 function MobileDrawer({ open, onClose, pathname }: { open: boolean; onClose: () => void; pathname: string }) {
   const reduce = useReducedMotion();
   const panel = useRef<HTMLDivElement>(null);
@@ -358,7 +313,6 @@ function MobileDrawer({ open, onClose, pathname }: { open: boolean; onClose: () 
   const groups: { key: MenuKey; label: string; links: (NavLink & { icon?: Parameters<typeof ChannelIcon>[0]["name"] })[] }[] = [
     { key: "services", label: "Services", links: serviceLinks },
     { key: "resources", label: "Resources", links: resourceLinks },
-    { key: "contact", label: "Contact Us", links: contactLinks() },
   ];
 
   return (
@@ -395,6 +349,7 @@ function MobileDrawer({ open, onClose, pathname }: { open: boolean; onClose: () 
                   { href: "/", label: "Home" },
                   { href: "/about", label: "About Us" },
                   { href: "/industries", label: "Industries" },
+                  { href: "/contact", label: "Contact Us" },
                 ].map((l) => (
                   <li key={l.href}>
                     <Link

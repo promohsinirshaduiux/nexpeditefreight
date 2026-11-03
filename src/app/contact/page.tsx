@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Breadcrumbs } from "@/components/sections/common";
 import { Eyebrow } from "@/components/ui/primitives";
 import { LineReveal } from "@/components/ui/Reveal";
 import { ChannelIcon } from "@/components/ui/SocialIcon";
-import { mailtoUrl, site, telUrl, whatsappUrl } from "@/data/site";
+import { mailtoUrl, mapsUrl, site, telUrl, whatsappUrl } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -26,7 +26,7 @@ export default function ContactPage() {
     <section className="bg-white pt-28 pb-[clamp(4rem,9vw,9rem)] md:pt-36">
       <div className="container-x">
         <Breadcrumbs items={[{ label: "Contact Us" }]} />
-        <div className="mt-12 grid gap-14 lg:grid-cols-12">
+        <div className="mt-6 grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Eyebrow>Get in touch</Eyebrow>
             <h1 className="text-display mt-3">
@@ -45,7 +45,11 @@ export default function ContactPage() {
                     {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className="group flex items-center gap-5 py-6"
                   >
-                    <span className="flex size-12 shrink-0 items-center justify-center rounded-lg border border-line text-blue transition-colors group-hover:border-blue group-hover:bg-blue group-hover:text-white">
+                    <span
+                      className={`flex size-12 shrink-0 items-center justify-center rounded-full border border-line transition-colors group-hover:text-white ${
+                        c.icon === "whatsapp" ? "text-whatsapp group-hover:border-[#075e54] group-hover:bg-[#075e54]" : "text-blue group-hover:border-blue group-hover:bg-blue"
+                      }`}
+                    >
                       <ChannelIcon name={c.icon} className="size-5" />
                     </span>
                     <span className="min-w-0 flex-1">
@@ -56,9 +60,17 @@ export default function ContactPage() {
                   </a>
                 </li>
               ))}
-              <li className="flex items-center gap-5 border-b border-line py-6">
-                <span className="eyebrow w-12 shrink-0 text-muted">Office</span>
-                <span className="font-display text-lg font-semibold text-ink">{site.contact.officeCity === "Pakistan" ? "Pakistan" : `${site.contact.officeCity}, Pakistan`}</span>
+              <li className="border-b border-line">
+                <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-5 py-6" aria-label={`Office: ${site.contact.officeAddress} (opens Google Maps in a new tab)`}>
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-line text-blue transition-colors group-hover:border-blue group-hover:bg-blue group-hover:text-white">
+                    <MapPin aria-hidden className="size-5" strokeWidth={1.6} />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="eyebrow block text-muted">Office</span>
+                    <span title={site.contact.officeAddress} className="mt-1 block truncate font-display text-lg font-semibold text-ink md:text-xl">{site.contact.officeAddress}</span>
+                  </span>
+                  <ArrowUpRight aria-hidden className="size-5 shrink-0 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue" />
+                </a>
               </li>
             </ul>
 
@@ -81,15 +93,14 @@ export default function ContactPage() {
             )}
           </div>
 
-          <div className="lg:col-span-6 lg:col-start-7">
-            <div className="rounded-2xl border border-line p-6 md:p-10">
+          <div className="lg:col-span-7 lg:col-start-6">
+            <div className="rounded-[1.75rem] bg-gray-100 p-6 md:p-10 lg:ml-auto lg:max-w-[620px]">
               <h2 className="font-display text-2xl font-semibold tracking-tight">Send us a message</h2>
               <p className="mt-2 mb-8 text-[0.9375rem] text-muted">
-                Fields marked <span className="text-blue">*</span> are required. Looking for a price?{" "}
+                <span className="text-blue">*</span> Required. Need a price?{" "}
                 <Link href="/get-a-quote" className="text-blue underline">
-                  Request a quotation
-                </Link>{" "}
-                instead.
+                  Get a quote
+                </Link>
               </p>
               <ContactForm />
             </div>

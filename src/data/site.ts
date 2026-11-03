@@ -28,6 +28,8 @@ export const site = {
     // UNVERIFIED: the profile references both Karachi and Lahore.
     // Set NEXT_PUBLIC_OFFICE_CITY once confirmed. No street address is published.
     officeCity: process.env.NEXT_PUBLIC_OFFICE_CITY ?? "Pakistan",
+    // PLACEHOLDER: dummy office address until the client confirms the real one.
+    officeAddress: process.env.NEXT_PUBLIC_OFFICE_ADDRESS ?? "Office 12, Business Centre, Shahrah-e-Faisal, Karachi, Pakistan",
   },
 
   // Only add URLs once the client supplies verified profiles.
@@ -102,3 +104,6 @@ export const differentiators = [
   { title: "Cost-effective solutions", text: "Routes, carriers and services chosen to balance cost with reliability for each shipment." },
   { title: "Responsive, hands-on support", text: "Direct access to our team for updates, questions and quick decisions when they matter." },
 ];
+
+/** Google Maps search link for the office address. */
+export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.contact.officeAddress)}`;

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
 import { forwardRef, useId } from "react";
 
@@ -55,7 +55,7 @@ export const TextField = forwardRef<HTMLInputElement, FieldShell & InputHTMLAttr
         aria-invalid={!!error}
         aria-required={required}
         aria-describedby={describedBy(id, error, hint)}
-        className={`${control} h-12 ${error ? "border-[#c4320a]" : "border-line"}`}
+        className={`${control} h-11 ${error ? "border-[#c4320a]" : "border-line"}`}
         {...props}
       />
     </Shell>
@@ -72,11 +72,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, FieldShell & TextareaHTM
       <textarea
         ref={ref}
         id={id}
-        rows={5}
+        rows={3}
         aria-invalid={!!error}
         aria-required={required}
         aria-describedby={describedBy(id, error, hint)}
-        className={`${control} min-h-32 resize-y py-3 ${error ? "border-[#c4320a]" : "border-line"}`}
+        className={`${control} min-h-20 resize-y py-3 ${error ? "border-[#c4320a]" : "border-line"}`}
         {...props}
       />
     </Shell>
@@ -98,7 +98,7 @@ export const SelectField = forwardRef<
           aria-invalid={!!error}
           aria-required={required}
           aria-describedby={describedBy(id, error, hint)}
-          className={`${control} h-12 cursor-pointer appearance-none pr-11 ${error ? "border-[#c4320a]" : "border-line"}`}
+          className={`${control} h-11 cursor-pointer appearance-none pr-11 ${error ? "border-[#c4320a]" : "border-line"}`}
           {...props}
         >
           <option value="">{placeholder}</option>
@@ -126,15 +126,22 @@ export const Consent = forwardRef<HTMLInputElement, { error?: string; children: 
   return (
     <div>
       <div className="flex items-start gap-3">
-        <input
-          ref={ref}
-          id={id}
-          type="checkbox"
-          aria-invalid={!!error}
-          aria-describedby={error ? `${id}-error` : undefined}
-          className="mt-0.5 size-5 shrink-0 cursor-pointer rounded border-line accent-blue"
-          {...props}
-        />
+        <span className="relative mt-0.5 flex size-5 shrink-0">
+          <input
+            ref={ref}
+            id={id}
+            type="checkbox"
+            aria-invalid={!!error}
+            aria-describedby={error ? `${id}-error` : undefined}
+            className="peer size-5 cursor-pointer appearance-none rounded-md border border-gray-300 bg-white transition-colors duration-200 checked:border-blue checked:bg-blue focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/15 aria-[invalid=true]:border-[#c4320a]"
+            {...props}
+          />
+          <Check
+            aria-hidden
+            strokeWidth={3}
+            className="pointer-events-none absolute inset-0 m-auto size-3.5 text-white opacity-0 transition-opacity duration-200 peer-checked:opacity-100"
+          />
+        </span>
         <label htmlFor={id} className="text-[0.875rem] leading-relaxed text-muted">
           {children}
         </label>

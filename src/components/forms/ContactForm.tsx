@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { contactMethodOptions, contactSchema, referralOptions, type ContactData, type ContactInput } from "@/lib/schemas";
 import { Consent, Honeypot, SelectField, TextArea, TextField } from "./fields";
 import { FormStatus, SuccessPanel, postForm, type SubmitState } from "./FormStatus";
@@ -49,9 +49,9 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="relative space-y-5" aria-label="Contact form">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="relative space-y-3" aria-label="Contact form">
       <Honeypot {...register("company_website")} />
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-x-4 gap-y-3 md:grid-cols-2">
         <TextField label="Full name" required autoComplete="name" {...register("fullName")} error={errors.fullName?.message} />
         <TextField label="Email" required type="email" autoComplete="email" {...register("email")} error={errors.email?.message} />
         <TextField label="Phone number" type="tel" autoComplete="tel" placeholder="+92 300 1234567" {...register("phone")} error={errors.phone?.message} />
@@ -60,10 +60,10 @@ export function ContactForm() {
       <TextField label="Subject" required {...register("subject")} error={errors.subject?.message} />
       <TextArea label="Message" required placeholder="How can we help?" {...register("message")} error={errors.message?.message} />
 
-      <div className="grid gap-5 md:grid-cols-2">
-        <SelectField label="How did you hear about us?" options={referralOptions} placeholder="Select one" {...register("referral")} error={errors.referral?.message} />
+      <div className="grid gap-x-4 gap-y-3 md:grid-cols-2">
+        <SelectField label="How did you find us?" options={referralOptions} placeholder="Select one" {...register("referral")} error={errors.referral?.message} />
         <SelectField
-          label="How would you prefer us to contact you?"
+          label="Preferred contact"
           options={contactMethodOptions}
           placeholder="No preference"
           {...register("contactMethod")}
@@ -90,7 +90,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="group inline-flex min-h-13 w-full items-center justify-center gap-3 rounded-lg bg-blue px-8 py-4 font-medium text-white transition-colors hover:bg-blue-dark disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+          className="inline-flex min-h-13 w-full items-center justify-center gap-3 rounded-lg bg-navy px-8 py-4 text-center font-medium text-white transition-colors hover:bg-navy-deep disabled:cursor-wait disabled:opacity-70"
         >
           {isSubmitting ? (
             <>
@@ -98,7 +98,7 @@ export function ContactForm() {
             </>
           ) : (
             <>
-              Send message <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
+              Send message
             </>
           )}
         </button>
