@@ -137,6 +137,29 @@
   background: linear-gradient(135deg, rgb(255 255 255 / 0.9), rgb(0 160 214 / 0.5) 55%, rgb(255 255 255 / 0.6));
 }
 
+/* Light frosted-glass card (Apple "regular" material): translucent white,
+   strong blur and saturation, a bright gradient rim, top highlight, soft depth. */
+/* Needs a positioned element (relative or absolute) for its rim; set that in markup. */
+.glass-light {
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.72), rgb(255 255 255 / 0.48));
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.9), 0 24px 48px -24px rgb(12 32 65 / 0.45), 0 2px 6px -2px rgb(12 32 65 / 0.12);
+}
+.glass-light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgb(255 255 255 / 0.95), rgb(255 255 255 / 0.35) 50%, rgb(255 255 255 / 0.8));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
 /* Apple-style frosted glass pills on the dark timeline. The glass tint sits on a
    solid navy base so the rail line behind the pill never shows through. */
 .pill-glass {

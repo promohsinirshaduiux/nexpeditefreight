@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import type { ReactNode } from "react";
-import { Button, Eyebrow, WhatsAppIcon } from "@/components/ui/primitives";
+import { Button, Eyebrow, WhatsAppLogo } from "@/components/ui/primitives";
 import { LineReveal, Reveal } from "@/components/ui/Reveal";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { site, whatsappUrl } from "@/data/site";
@@ -70,7 +70,7 @@ export function PageHero({
         <div className="mt-10 grid gap-10 md:mt-14 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <Eyebrow>{eyebrow}</Eyebrow>
-            <h1 className="text-display mt-6 text-ink">
+            <h1 className="text-display mt-3 text-ink">
               <LineReveal lines={title} />
             </h1>
           </div>
@@ -118,7 +118,7 @@ export function SectionHeading({
       <div className={`grid gap-8 lg:grid-cols-12 lg:items-end ${className}`}>
         <div className="lg:col-span-7">
           <Eyebrow tone={tone === "dark" ? "cyan" : "blue"}>{eyebrow}</Eyebrow>
-          <h2 className={`text-h2 mt-6 ${titleColor}`}>
+          <h2 className={`text-h2 mt-3 ${titleColor}`}>
             <LineReveal lines={title} />
           </h2>
         </div>
@@ -133,7 +133,7 @@ export function SectionHeading({
   return (
     <div className={`max-w-3xl ${className}`}>
       <Eyebrow tone={tone === "dark" ? "cyan" : "blue"}>{eyebrow}</Eyebrow>
-      <h2 className={`text-h2 mt-6 ${titleColor}`}>
+      <h2 className={`text-h2 mt-3 ${titleColor}`}>
         <LineReveal lines={title} />
       </h2>
       {intro && (
@@ -166,7 +166,7 @@ export function CtaBand({
       <div className="container-x section-y grid gap-10 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-7">
           <Eyebrow tone="cyan">Start a shipment</Eyebrow>
-          <h2 className="text-h2 mt-6">
+          <h2 className="text-h2 mt-3">
             <LineReveal lines={title} />
           </h2>
         </div>
@@ -176,7 +176,7 @@ export function CtaBand({
             <Button href={primaryHref} variant="light">
               {primaryLabel}
             </Button>
-            <Button href={whatsappUrl()} variant="ghost-light" external icon={<WhatsAppIcon className="size-4" />}>
+            <Button href={whatsappUrl()} variant="ghost-light" external icon={<WhatsAppLogo className="size-5" />}>
               Talk on WhatsApp
             </Button>
           </div>

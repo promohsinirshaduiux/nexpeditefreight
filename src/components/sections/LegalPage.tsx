@@ -12,7 +12,7 @@ export function LegalPage({ title, label, sections }: { title: string; label: st
         <div className="container-x">
           <Breadcrumbs items={[{ label: "Resources" }, { label: title }]} />
           <Eyebrow className="mt-12">{label}</Eyebrow>
-          <h1 className="text-h2 mt-6 max-w-3xl">{title}</h1>
+          <h1 className="text-h2 mt-3 max-w-3xl">{title}</h1>
           <p role="note" className="mt-8 max-w-3xl rounded-lg border border-[#e8c96b] bg-[#fdf8e7] px-5 py-4 text-[0.9375rem] text-[#5c4708]">
             <strong className="font-semibold">Draft for review.</strong> This document is a structured draft prepared for Nexpedite Freight and
             has not been approved by a legal professional. Items in [square brackets] require confirmation before publication.

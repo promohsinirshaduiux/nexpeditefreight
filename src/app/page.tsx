@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Flag } from "lucide-react";
 import { Button, Eyebrow, TextLink } from "@/components/ui/primitives";
 import { CountUp, LineReveal, Marquee, Reveal, ScrubWords, SplitChars } from "@/components/ui/Reveal";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
@@ -39,7 +39,7 @@ export default function HomePage() {
                   ))}
                 </p>
               </Reveal>
-              <h1 className="mt-6 max-w-5xl font-display text-[clamp(3rem,8vw,6.75rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
+              <h1 className="mt-3 max-w-5xl font-display text-[clamp(3rem,8vw,6.75rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
                 <SplitChars hero lines={["Freight forwarding.", "Handled personally."]} delay={0.15} />
               </h1>
             </div>
@@ -103,14 +103,21 @@ export default function HomePage() {
               alt="Aerial view of an organised container terminal yard"
               className="aspect-[4/5] rounded-xl"
             />
-            <Reveal delay={0.5} className="absolute -bottom-6 right-4 max-w-[15rem] rounded-lg bg-white p-5 shadow-[0_20px_40px_-24px_rgba(12,32,65,0.35)] md:-right-8 md:p-6">
-              <p className="font-display text-sm font-semibold text-blue">Founded {site.founded}</p>
-              <p className="mt-1 text-[0.9375rem] leading-snug text-ink">New company. Established experience.</p>
+            <Reveal delay={0.5} className="glass-light absolute -bottom-6 right-4 max-w-[19rem] rounded-[1.25rem] p-4 md:-right-8 md:p-5">
+              <div className="flex items-center gap-4">
+                <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-white/80 bg-white/50 text-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
+                  <Flag aria-hidden className="size-[18px]" strokeWidth={1.6} />
+                </span>
+                <div>
+                  <p className="font-display text-sm font-semibold text-blue">Founded {site.founded}</p>
+                  <p className="mt-0.5 text-[0.9375rem] leading-snug text-ink">New company. Established experience.</p>
+                </div>
+              </div>
             </Reveal>
           </div>
           <div className="lg:col-span-6 lg:col-start-7 lg:pl-6">
             <Eyebrow>About Nexpedite</Eyebrow>
-            <h2 className="text-h2 mt-6 lg:whitespace-nowrap">
+            <h2 className="text-h2 mt-3 lg:whitespace-nowrap">
               <LineReveal lines={["Built on experience.", "Driven by", "commitment."]} />
             </h2>
             <Reveal delay={0.15}>
@@ -138,7 +145,7 @@ export default function HomePage() {
         <div className="container-x section-y">
           <Eyebrow>Our approach</Eyebrow>
           <ScrubWords
-            className="mt-10 max-w-6xl font-display text-[clamp(1.875rem,4.4vw,4rem)] font-semibold leading-[1.12] tracking-[-0.03em] text-navy"
+            className="mt-4 max-w-6xl font-display text-[clamp(1.875rem,4.4vw,4rem)] font-semibold leading-[1.12] tracking-[-0.03em] text-navy"
             text="New as a company, not new to logistics. Every quotation, routing decision and customs clearance is guided by three decades of real judgment — applied directly to your cargo, as if it were our own."
           />
         </div>
@@ -153,7 +160,7 @@ export default function HomePage() {
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-32">
               <Eyebrow>Why Nexpedite Freight</Eyebrow>
-              <h2 className="text-h2 mt-6 lg:whitespace-nowrap">
+              <h2 className="text-h2 mt-3 lg:whitespace-nowrap">
                 <LineReveal lines={["Experience that", "makes the", "difference."]} />
               </h2>
               <Reveal delay={0.15}>
@@ -276,7 +283,7 @@ export default function HomePage() {
           <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
               <Eyebrow>Reach</Eyebrow>
-              <h2 className="text-h2 mt-6">
+              <h2 className="text-h2 mt-3">
                 <LineReveal lines={["Global reach,", "local attention."]} />
               </h2>
             </div>

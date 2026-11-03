@@ -108,8 +108,8 @@ export function ProcessTimeline({ tone = "dark" }: { tone?: "dark" | "light" }) 
                 Step {i + 1}
               </button>
 
-              {/* Only the content dims for upcoming steps; the pill stays opaque so the rail never shows through it */}
-              <div className={`mt-5 transition-opacity duration-700 lg:mt-8 ${isActive || done || !running ? "opacity-100" : "opacity-60"}`}>
+              {/* Every step shows at full strength; only the pill and icon mark progress */}
+              <div className="mt-5 lg:mt-8">
                 <span
                   className={`relative flex size-11 items-center justify-center rounded-full border transition-[background,border-color,box-shadow] duration-500 ${
                     dark

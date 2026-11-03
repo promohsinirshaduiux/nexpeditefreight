@@ -19,7 +19,7 @@ export default function NotFound() {
           <p className="eyebrow text-cyan">
             Error 404
           </p>
-          <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[1] tracking-[-0.035em]">
+          <h1 className="mt-3 max-w-4xl font-display text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[1] tracking-[-0.035em]">
             Looks like this shipment took a wrong turn.
           </h1>
           <p className="text-lead mt-6 max-w-xl text-white/75">The page you&apos;re looking for isn&apos;t available.</p>

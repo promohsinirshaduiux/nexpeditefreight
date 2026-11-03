@@ -9,12 +9,21 @@ const root = path.resolve(import.meta.dirname, "..");
 const rawDir = path.join(root, "design/source-images");
 const outDir = path.join(root, "public/images");
 
+// Per-image settings where the default is heavier than the image needs.
+// terminal-aerial: busy detail compresses poorly; it shows ≤ 600px wide on the
+// homepage and as a dimmed full-width background on About.
+const overrides = {
+  "terminal-aerial": { width: 1400, quality: 65 },
+};
+
 for (const file of await readdir(rawDir)) {
   if (!/\.(png|jpe?g|webp)$/i.test(file)) continue;
-  const out = path.join(outDir, file.replace(/\.\w+$/, ".jpg"));
+  const name = file.replace(/\.\w+$/, "");
+  const { width = 2200, quality = 78 } = overrides[name] ?? {};
+  const out = path.join(outDir, `${name}.jpg`);
   await sharp(path.join(rawDir, file))
-    .resize({ width: 2200, withoutEnlargement: true })
-    .jpeg({ quality: 78, mozjpeg: true, progressive: true })
+    .resize({ width, withoutEnlargement: true })
+    .jpeg({ quality, mozjpeg: true, progressive: true })
     .toFile(out);
   console.log("image", path.basename(out));
 }

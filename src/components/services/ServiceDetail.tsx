@@ -57,7 +57,7 @@ function ServiceHero({ s, variant }: { s: Service; variant: Variant }) {
             <p className="eyebrow text-cyan">
               Service {s.n} — {s.eyebrow}
             </p>
-            <h1 className="text-display mt-6 max-w-4xl">
+            <h1 className="text-display mt-3 max-w-4xl">
               <LineReveal lines={[s.title]} />
             </h1>
             <Reveal delay={0.2} className="mt-8 flex flex-col gap-8 border-t border-white/20 pt-8 md:flex-row md:items-end md:justify-between">
@@ -80,7 +80,7 @@ function ServiceHero({ s, variant }: { s: Service; variant: Variant }) {
             <span className="font-display text-sm font-semibold text-blue tabular-nums">{s.n}</span>
             <Eyebrow tone="muted">{s.eyebrow}</Eyebrow>
           </div>
-          <h1 className="mt-6 font-display text-[clamp(3rem,9vw,8rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">
+          <h1 className="mt-3 font-display text-[clamp(3rem,9vw,8rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">
             <LineReveal lines={[s.title]} />
           </h1>
           <Reveal delay={0.2} className="mt-10 grid gap-8 md:grid-cols-12">
@@ -107,7 +107,7 @@ function ServiceHero({ s, variant }: { s: Service; variant: Variant }) {
           <p className="eyebrow mt-12 text-blue">
             Service {s.n} — {s.eyebrow}
           </p>
-          <h1 className="text-display mt-6 text-ink">
+          <h1 className="text-display mt-3 text-ink">
             <LineReveal lines={s.title.split(" ").length > 1 ? [s.title.split(" ")[0], s.title.split(" ").slice(1).join(" ")] : [s.title]} />
           </h1>
           <Reveal delay={0.2}>

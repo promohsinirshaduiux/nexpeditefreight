@@ -28,7 +28,7 @@ export default function FaqsPage() {
           <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">
               <Eyebrow>Help centre</Eyebrow>
-              <h1 className="text-display mt-6">
+              <h1 className="text-display mt-3">
                 <LineReveal lines={["Questions,", "answered."]} />
               </h1>
             </div>

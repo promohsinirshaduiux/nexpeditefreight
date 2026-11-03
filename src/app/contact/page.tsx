@@ -29,7 +29,7 @@ export default function ContactPage() {
         <div className="mt-12 grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Eyebrow>Get in touch</Eyebrow>
-            <h1 className="text-display mt-6">
+            <h1 className="text-display mt-3">
               <LineReveal lines={["Let's talk", "freight."]} />
             </h1>
             <p className="text-lead mt-8 max-w-md text-muted">

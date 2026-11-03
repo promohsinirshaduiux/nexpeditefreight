@@ -98,7 +98,7 @@ export default function ServicesPage() {
           </Reveal>
           <div className="lg:col-span-6 lg:col-start-7">
             <Eyebrow>Integrated approach</Eyebrow>
-            <h2 className="text-h2 mt-6">Door to door, without the gaps.</h2>
+            <h2 className="text-h2 mt-3">Door to door, without the gaps.</h2>
             <Reveal delay={0.1}>
               <p className="text-lead mt-8 text-ink">
                 A typical export might start with road pickup, move through customs, sail as ocean freight and finish with storage and

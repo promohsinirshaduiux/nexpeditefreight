@@ -25,7 +25,7 @@ export default function AboutPage() {
         <div className="container-x">
           <Breadcrumbs items={[{ label: "About Us" }]} />
           <Eyebrow className="mt-12">About Nexpedite Freight</Eyebrow>
-          <h1 className="mt-6 font-display text-[clamp(3rem,8.4vw,7.5rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">
+          <h1 className="mt-3 font-display text-[clamp(3rem,8.4vw,7.5rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">
             <LineReveal lines={["New company.", "Established", "experience."]} />
           </h1>
         </div>
@@ -187,7 +187,7 @@ export default function AboutPage() {
         <div className="container-x section-y grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <Eyebrow tone="cyan">Reach</Eyebrow>
-            <h2 className="text-h2 mt-6">
+            <h2 className="text-h2 mt-3">
               <LineReveal lines={["Building a global", "partner network."]} />
             </h2>
             <Reveal delay={0.15}>

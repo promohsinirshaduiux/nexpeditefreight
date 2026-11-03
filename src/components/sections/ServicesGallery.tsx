@@ -16,7 +16,7 @@ export function ServicesGallery() {
           <div className="flex w-[82vw] shrink-0 snap-start flex-col justify-between sm:w-[420px] lg:w-[460px] lg:pr-10">
             <div>
               <Eyebrow tone="cyan">What we do</Eyebrow>
-              <h2 className="text-h2 mt-6">
+              <h2 className="text-h2 mt-3">
                 <LineReveal lines={["Logistics", "solutions for", "every journey."]} />
               </h2>
             </div>
