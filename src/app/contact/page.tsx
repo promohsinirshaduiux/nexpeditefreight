@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowUpRight, MapPin, MessageSquareText } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Breadcrumbs } from "@/components/sections/common";
 import { Eyebrow } from "@/components/ui/primitives";
@@ -95,8 +95,11 @@ export default function ContactPage() {
 
           <div className="lg:col-span-7 lg:col-start-6">
             <div className="rounded-[1.75rem] bg-gray-100 p-6 md:p-10 lg:ml-auto lg:max-w-[620px]">
-              <h2 className="font-display text-2xl font-semibold tracking-tight">Send us a message</h2>
-              <p className="mt-2 mb-8 text-[0.9375rem] text-muted">
+              <h2 className="flex items-center gap-3 font-display text-2xl font-semibold tracking-tight">
+                <MessageSquareText aria-hidden className="size-7 shrink-0 text-blue" strokeWidth={1.75} />
+                Send us a message
+              </h2>
+              <p className="mt-3.5 mb-8 text-[0.9375rem] text-muted">
                 <span className="text-blue">*</span> Required. Need a price?{" "}
                 <Link href="/get-a-quote" className="text-blue underline">
                   Get a quote
