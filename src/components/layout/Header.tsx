@@ -19,8 +19,6 @@ export function Header() {
   const [open, setOpen] = useState<MenuKey | null>(null);
   const [drawer, setDrawer] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const lastY = useRef(0);
 
   // Close menus whenever the route changes.
   const [prevPath, setPrevPath] = useState(pathname);
@@ -31,13 +29,8 @@ export function Header() {
   }
 
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 8);
-      setHidden(y > 240 && y > lastY.current + 4);
-      if (y < lastY.current - 4 || y < 240) setHidden(false);
-      lastY.current = y;
-    };
+    // The header stays pinned; scrolling only adds a hairline shadow.
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -56,9 +49,9 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,box-shadow] duration-500 ${
-          hidden && !open && !drawer ? "-translate-y-full" : "translate-y-0"
-        } ${scrolled || open ? "bg-white/95 shadow-[0_1px_0_var(--color-line)] backdrop-blur-md" : "bg-white"}`}
+        className={`fixed inset-x-0 top-0 z-50 bg-white transition-shadow duration-300 ${
+          scrolled || open ? "shadow-[0_1px_0_var(--color-line),0_8px_24px_-16px_rgba(12,32,65,0.18)]" : ""
+        }`}
       >
         <div className="container-x flex h-[72px] items-center justify-between gap-6 md:h-20">
           <Link href="/" aria-label="Nexpedite Freight home" className="shrink-0">

@@ -32,7 +32,8 @@ export function Effects() {
     window.__nxEffects = true;
     gsap.registerPlugin(ScrollTrigger);
     if (reduce()) return;
-    const lenis = new Lenis({ duration: 1.15, easing: (t) => 1 - Math.pow(1 - t, 4), anchors: { offset: -96 } });
+    // Continuous glide (lerp) feels steadier than a fixed-duration ease on wheels and trackpads.
+    const lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, smoothWheel: true, anchors: { offset: -96 } });
     window.__lenis = lenis;
     lenis.on("scroll", ScrollTrigger.update);
     const tick = (time: number) => lenis.raf(time * 1000);
