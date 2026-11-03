@@ -73,9 +73,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col gap-4 border-t border-line pt-8 text-[0.8125rem] text-muted md:flex-row md:items-center md:justify-between">
+        <div
+          data-whatsapp-avoid
+          className="mt-20 flex flex-col gap-4 border-t border-line pt-8 text-[0.8125rem] text-muted lg:flex-row lg:items-center lg:justify-between"
+        >
           <p>
             © {year} {site.legalName}. All rights reserved.
+          </p>
+          <p className="lg:order-last">
+            Designed &amp; Developed by{" "}
+            <a
+              href="https://www.endpointclients.com/"
+              target="_blank"
+              rel="noopener"
+              className="link-underline font-medium text-ink hover:text-blue"
+            >
+              Endpoint Clients
+            </a>
           </p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             <li>
