@@ -93,6 +93,24 @@
   .process-bar { height: 1px; width: min(calc(var(--n, 0) / 5 * 100%), 100%); }
 }
 
+/* Story icons on the About page: small looping motions that suit each icon.
+   (The reduced-motion rule below flattens these for visitors who opt out.) */
+@keyframes icon-hourglass {
+  0%, 60% { transform: rotate(0deg); }
+  80%, 100% { transform: rotate(180deg); }
+}
+@keyframes icon-bulb {
+  0%, 100% { color: var(--color-blue); filter: none; }
+  50% { color: var(--color-cyan); filter: drop-shadow(0 0 6px rgb(0 160 214 / 0.65)); }
+}
+@keyframes icon-rocket {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(2px, -3px) rotate(-6deg); }
+}
+.icon-anim-hourglass { animation: icon-hourglass 3.2s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+.icon-anim-bulb { animation: icon-bulb 2.6s ease-in-out infinite; }
+.icon-anim-rocket { animation: icon-rocket 2.2s ease-in-out infinite; }
+
 /* Very subtle film grain over dark sections (an inline SVG noise tile). */
 .bg-noise { position: relative; isolation: isolate; }
 .bg-noise::before {
@@ -137,6 +155,42 @@
   background: linear-gradient(135deg, rgb(255 255 255 / 0.9), rgb(0 160 214 / 0.5) 55%, rgb(255 255 255 / 0.6));
 }
 
+/* Footer wordmark: faint at rest, letters light up blue→cyan in a wave on hover */
+.footer-word .char,
+.motion-ready .footer-word [data-reveal="chars"] .char {
+  color: rgb(12 32 65 / 0.07);
+  transition: color 0.6s var(--ease-out-expo) calc(var(--i, 0) * 0.04s), transform 1.1s var(--ease-out-expo) calc(var(--d, 0s) + var(--i, 0) * 0.022s), opacity 0.6s ease calc(var(--d, 0s) + var(--i, 0) * 0.022s);
+}
+.footer-word:hover .char:nth-child(odd) { color: rgb(0 89 165 / 0.85); }
+.footer-word:hover .char:nth-child(even) { color: rgb(0 160 214 / 0.85); }
+
+/* Grain that appears on hover and drifts slightly, like live film grain.
+   Uses the same noise tile as .bg-noise; the element needs `group`. */
+.noise-hover { position: relative; isolation: isolate; overflow: hidden; }
+.noise-hover::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  transition: opacity 0.5s ease;
+}
+.noise-hover:hover::before {
+  opacity: 0.16;
+  animation: grain-drift 0.8s steps(4) infinite;
+}
+@keyframes grain-drift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -2%); }
+  100% { transform: translate(0, 0); }
+}
+
 /* Light frosted-glass card (Apple "regular" material): translucent white,
    strong blur and saturation, a bright gradient rim, top highlight, soft depth. */
 /* Needs a positioned element (relative or absolute) for its rim; set that in markup. */
@@ -159,6 +213,33 @@
   mask-composite: exclude;
   pointer-events: none;
 }
+
+/* Icon circle that turns into the dark-glass style when its card (.group) is hovered. */
+.icon-glass-hover { position: relative; transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, color 0.5s; }
+.icon-glass-hover::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgb(255 255 255 / 0.7), rgb(255 255 255 / 0.1) 55%, rgb(255 255 255 / 0.45));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+.group:hover .icon-glass-hover {
+  border-color: transparent;
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.18), rgb(255 255 255 / 0.04));
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  backdrop-filter: blur(12px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 8px 20px -10px rgb(0 0 0 / 0.6);
+  color: #fff;
+}
+.group:hover .icon-glass-hover::before { opacity: 1; }
 
 /* Apple-style frosted glass pills on the dark timeline. The glass tint sits on a
    solid navy base so the rail line behind the pill never shows through. */
