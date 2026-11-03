@@ -98,7 +98,7 @@ export function Header() {
           <div className="flex items-center gap-2">
             <Link
               href="/get-a-quote"
-              className="group hidden min-h-11 items-center gap-2 rounded-lg bg-blue px-5 text-[0.875rem] font-medium text-white transition-colors hover:bg-blue-dark sm:inline-flex"
+              className="group hidden min-h-11 items-center gap-2 whitespace-nowrap rounded-lg bg-blue px-5 text-[0.875rem] font-medium text-white transition-colors hover:bg-blue-dark sm:inline-flex"
             >
               Get a Quote
               <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-0.5" />
@@ -127,7 +127,7 @@ function NavItem({ href, label, active }: { href: string; label: string; active:
       <Link
         href={href}
         aria-current={active ? "page" : undefined}
-        className={`relative inline-flex h-11 items-center px-3.5 text-[0.9375rem] transition-colors hover:text-blue ${
+        className={`relative inline-flex h-11 items-center whitespace-nowrap px-3 text-[0.9375rem] xl:px-3.5 transition-colors hover:text-blue ${
           active ? "text-blue" : "text-ink"
         }`}
       >
@@ -208,7 +208,7 @@ function Dropdown({
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((p) => (p === id ? null : id))}
-        className={`relative inline-flex h-11 items-center gap-1.5 px-3.5 text-[0.9375rem] transition-colors hover:text-blue ${
+        className={`relative inline-flex h-11 items-center gap-1.5 whitespace-nowrap px-3 text-[0.9375rem] xl:px-3.5 transition-colors hover:text-blue ${
           active || open ? "text-blue" : "text-ink"
         }`}
       >
