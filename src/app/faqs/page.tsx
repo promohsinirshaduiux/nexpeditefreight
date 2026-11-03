@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { createElement } from "react";
 import { Accordion } from "@/components/ui/Accordion";
 import { Button, Eyebrow, WhatsAppIcon } from "@/components/ui/primitives";
 import { Breadcrumbs } from "@/components/sections/common";
+import { SectionNav } from "@/components/sections/SectionNav";
+import { faqIcon } from "@/components/sections/faqIcons";
 import { LineReveal } from "@/components/ui/Reveal";
 import { faqGroups } from "@/data/faqs";
 import { mailtoUrl, site, whatsappUrl } from "@/data/site";
@@ -25,14 +28,14 @@ export default function FaqsPage() {
       <section className="bg-white pt-28 md:pt-36">
         <div className="container-x">
           <Breadcrumbs items={[{ label: "Resources" }, { label: "FAQs" }]} />
-          <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-8">
+          <div className="mt-8 grid gap-6 rounded-[1.75rem] bg-gray-100 px-6 py-10 md:px-12 md:py-14 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-12">
               <Eyebrow>Help centre</Eyebrow>
-              <h1 className="text-display mt-3">
-                <LineReveal lines={["Questions,", "answered."]} />
+              <h1 className="mt-3 font-display text-[clamp(2.25rem,5.6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-ink">
+                <LineReveal lines={["Frequently Asked Questions?"]} />
               </h1>
             </div>
-            <p className="text-lead text-muted lg:col-span-4">
+            <p className="text-lead text-muted lg:col-span-12">
               Straightforward answers about how freight forwarding works with us. Can&apos;t find yours? Ask our team directly.
             </p>
           </div>
@@ -41,23 +44,23 @@ export default function FaqsPage() {
 
       <section className="section-y bg-white">
         <div className="container-x grid gap-12 lg:grid-cols-12">
-          <nav aria-label="FAQ categories" className="lg:col-span-3">
-            <ul className="flex gap-2 overflow-x-auto pb-2 lg:sticky lg:top-32 lg:flex-col lg:gap-1 lg:overflow-visible">
-              {faqGroups.map((g) => (
-                <li key={g.id} className="shrink-0">
-                  <a href={`#${g.id}`} className="block whitespace-nowrap rounded-lg border border-line px-4 py-2.5 text-[0.9375rem] text-ink transition-colors hover:border-blue hover:text-blue lg:border-transparent lg:px-3">
-                    {g.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <SectionNav items={faqGroups.map(({ id, title }) => ({ id, title }))} label="FAQ categories" badge="icon" />
           <div className="space-y-20 lg:col-span-8 lg:col-start-5">
             {faqGroups.map((g) => (
               <section key={g.id} id={g.id} aria-labelledby={`${g.id}-h`} className="scroll-mt-28">
-                <h2 id={`${g.id}-h`} className="eyebrow mb-6 text-blue">
-                  {g.title}
-                </h2>
+                <div className="mb-6 flex items-center gap-4">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-blue/[0.07] text-blue">
+                    <FaqIcon id={g.id} />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <h2 id={`${g.id}-h`} className="font-display text-[clamp(1.375rem,2.2vw,1.75rem)] font-semibold leading-tight tracking-[-0.02em] text-ink">
+                      {g.title}
+                    </h2>
+                  </div>
+                  <span className="hidden shrink-0 rounded-full border border-line px-3 py-1 text-[0.8125rem] text-muted sm:inline-block">
+                    {g.items.length} {g.items.length === 1 ? "question" : "questions"}
+                  </span>
+                </div>
                 <Accordion items={g.items} />
               </section>
             ))}
@@ -88,4 +91,8 @@ export default function FaqsPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   );
+}
+
+function FaqIcon({ id }: { id: string }) {
+  return createElement(faqIcon(id), { "aria-hidden": true, className: "size-5", strokeWidth: 1.75 });
 }
