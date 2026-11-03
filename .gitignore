@@ -44,3 +44,7 @@ next-env.d.ts
 
 # original generated images (re-create web versions with: node scripts/optimize-images.mjs)
 /design/source-images
+
+
+# Vercel CLI link
+.vercel
