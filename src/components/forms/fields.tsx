@@ -1,0 +1,173 @@
+"use client";
+
+import { ChevronDown } from "lucide-react";
+import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
+import { forwardRef, useId } from "react";
+
+const control =
+  "w-full rounded-lg border bg-white px-4 text-[0.9375rem] text-ink placeholder:text-muted/70 transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4 focus:ring-blue/10 focus:border-blue aria-[invalid=true]:border-[#c4320a] aria-[invalid=true]:ring-[#c4320a]/10";
+
+type FieldShell = { label: string; error?: string; hint?: string; required?: boolean; className?: string };
+
+function Shell({ id, label, error, hint, required, className = "", children }: FieldShell & { id: string; children: ReactNode }) {
+  return (
+    <div className={className}>
+      <label htmlFor={id} className="mb-2 block text-[0.875rem] font-medium text-ink">
+        {label}
+        {required ? (
+          <span className="text-blue" aria-hidden>
+            {" "}
+            *
+          </span>
+        ) : (
+          <span className="font-normal text-muted"> (optional)</span>
+        )}
+      </label>
+      {children}
+      {hint && !error && (
+        <p id={`${id}-hint`} className="mt-1.5 text-[0.8125rem] text-muted">
+          {hint}
+        </p>
+      )}
+      {error && (
+        <p id={`${id}-error`} className="mt-1.5 text-[0.8125rem] font-medium text-[#b42318]">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function describedBy(id: string, error?: string, hint?: string) {
+  return error ? `${id}-error` : hint ? `${id}-hint` : undefined;
+}
+
+export const TextField = forwardRef<HTMLInputElement, FieldShell & InputHTMLAttributes<HTMLInputElement>>(function TextField(
+  { label, error, hint, required, className, ...props },
+  ref,
+) {
+  const id = useId();
+  return (
+    <Shell id={id} label={label} error={error} hint={hint} required={required} className={className}>
+      <input
+        ref={ref}
+        id={id}
+        aria-invalid={!!error}
+        aria-required={required}
+        aria-describedby={describedBy(id, error, hint)}
+        className={`${control} h-12 ${error ? "border-[#c4320a]" : "border-line"}`}
+        {...props}
+      />
+    </Shell>
+  );
+});
+
+export const TextArea = forwardRef<HTMLTextAreaElement, FieldShell & TextareaHTMLAttributes<HTMLTextAreaElement>>(function TextArea(
+  { label, error, hint, required, className, ...props },
+  ref,
+) {
+  const id = useId();
+  return (
+    <Shell id={id} label={label} error={error} hint={hint} required={required} className={className}>
+      <textarea
+        ref={ref}
+        id={id}
+        rows={5}
+        aria-invalid={!!error}
+        aria-required={required}
+        aria-describedby={describedBy(id, error, hint)}
+        className={`${control} min-h-32 resize-y py-3 ${error ? "border-[#c4320a]" : "border-line"}`}
+        {...props}
+      />
+    </Shell>
+  );
+});
+
+/** Native select restyled — keeps full keyboard, screen-reader and mobile picker support. */
+export const SelectField = forwardRef<
+  HTMLSelectElement,
+  FieldShell & SelectHTMLAttributes<HTMLSelectElement> & { options: readonly (string | { value: string; label: string })[]; placeholder?: string }
+>(function SelectField({ label, error, hint, required, className, options, placeholder = "Select an option", ...props }, ref) {
+  const id = useId();
+  return (
+    <Shell id={id} label={label} error={error} hint={hint} required={required} className={className}>
+      <div className="relative">
+        <select
+          ref={ref}
+          id={id}
+          aria-invalid={!!error}
+          aria-required={required}
+          aria-describedby={describedBy(id, error, hint)}
+          className={`${control} h-12 cursor-pointer appearance-none pr-11 ${error ? "border-[#c4320a]" : "border-line"}`}
+          {...props}
+        >
+          <option value="">{placeholder}</option>
+          {options.map((o) => {
+            const v = typeof o === "string" ? o : o.value;
+            const l = typeof o === "string" ? o : o.label;
+            return (
+              <option key={v} value={v}>
+                {l}
+              </option>
+            );
+          })}
+        </select>
+        <ChevronDown aria-hidden className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-muted" />
+      </div>
+    </Shell>
+  );
+});
+
+export const Consent = forwardRef<HTMLInputElement, { error?: string; children: ReactNode } & InputHTMLAttributes<HTMLInputElement>>(function Consent(
+  { error, children, ...props },
+  ref,
+) {
+  const id = useId();
+  return (
+    <div>
+      <div className="flex items-start gap-3">
+        <input
+          ref={ref}
+          id={id}
+          type="checkbox"
+          aria-invalid={!!error}
+          aria-describedby={error ? `${id}-error` : undefined}
+          className="mt-0.5 size-5 shrink-0 cursor-pointer rounded border-line accent-blue"
+          {...props}
+        />
+        <label htmlFor={id} className="text-[0.875rem] leading-relaxed text-muted">
+          {children}
+        </label>
+      </div>
+      {error && (
+        <p id={`${id}-error`} className="mt-1.5 pl-8 text-[0.8125rem] font-medium text-[#b42318]">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+});
+
+/** Hidden from people and assistive tech; bots tend to fill it. */
+export function Honeypot(props: InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+      <label>
+        Company website
+        <input type="text" tabIndex={-1} autoComplete="off" {...props} />
+      </label>
+    </div>
+  );
+}
+
+export function Fieldset({ legend, n, children }: { legend: string; n: string; children: ReactNode }) {
+  return (
+    <fieldset className="border-t border-line pt-8 first:border-t-0 first:pt-0">
+      <legend className="mb-6 flex items-baseline gap-3">
+        <span className="font-display text-xs font-semibold text-blue tabular-nums">{n}</span>
+        <span className="font-display text-lg font-semibold text-ink">{legend}</span>
+      </legend>
+      {children}
+    </fieldset>
+  );
+}
