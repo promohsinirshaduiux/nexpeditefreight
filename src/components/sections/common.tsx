@@ -54,6 +54,7 @@ export function PageHero({
   imageAlt,
   crumbs,
   children,
+  introWide,
 }: {
   eyebrow: string;
   title: string[];
@@ -62,19 +63,21 @@ export function PageHero({
   imageAlt?: string;
   crumbs: Crumb[];
   children?: ReactNode;
+  /** Give the intro the right half of the row (shorter, wider lines) instead of the last third. */
+  introWide?: boolean;
 }) {
   return (
     <section className="relative bg-white pt-28 md:pt-36">
       <div className="container-x">
         <Breadcrumbs items={crumbs} />
         <div className="mt-10 grid gap-10 md:mt-14 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-8">
+          <div className={introWide ? "lg:col-span-6" : "lg:col-span-8"}>
             <Eyebrow>{eyebrow}</Eyebrow>
             <h1 className="text-display mt-3 text-ink">
               <LineReveal lines={title} />
             </h1>
           </div>
-          <Reveal delay={0.2} className="lg:col-span-4 lg:pb-3">
+          <Reveal delay={0.2} className={`lg:pb-3 ${introWide ? "lg:col-span-6 lg:col-start-7" : "lg:col-span-4"}`}>
             <p className="text-lead text-muted">{intro}</p>
             {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
           </Reveal>
@@ -100,6 +103,7 @@ export function SectionHeading({
   eyebrow,
   title,
   intro,
+  action,
   align = "left",
   tone = "light",
   className = "",
@@ -107,6 +111,8 @@ export function SectionHeading({
   eyebrow: string;
   title: string[];
   intro?: string;
+  /** Optional call to action shown under the intro (split layout). */
+  action?: ReactNode;
   align?: "left" | "split";
   tone?: "light" | "dark";
   className?: string;
@@ -125,6 +131,7 @@ export function SectionHeading({
         {intro && (
           <Reveal delay={0.15} className="lg:col-span-4 lg:col-start-9">
             <p className={`text-lead ${introColor}`}>{intro}</p>
+            {action && <div className="mt-6">{action}</div>}
           </Reveal>
         )}
       </div>
