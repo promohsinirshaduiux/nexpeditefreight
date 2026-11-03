@@ -31,7 +31,6 @@ export const metadata: Metadata = {
     images: [{ url: "/images/hero-port.jpg", width: 1920, height: 1086, alt: "Container ship leaving port at dusk" }],
   },
   twitter: { card: "summary_large_image" },
-  icons: { icon: "/brand/icon.png", apple: "/brand/icon.png" },
 };
 
 export const viewport: Viewport = {

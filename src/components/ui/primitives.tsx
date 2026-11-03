@@ -9,8 +9,8 @@ export function Logo({ className = "", priority = false }: { className?: string;
     <Image
       src="/brand/logo.png"
       alt="Nexpedite Freight — Your Freight Partner"
-      width={1475}
-      height={282}
+      width={1859}
+      height={362}
       priority={priority}
       className={`h-auto w-[168px] md:w-[196px] ${className}`}
     />
