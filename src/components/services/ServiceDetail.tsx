@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowUpRight, Check } from "lucide-react";
@@ -49,14 +48,13 @@ function ServiceHero({ s, variant }: { s: Service; variant: Variant }) {
     return (
       <section className="relative bg-white px-3 pt-[72px] md:px-5 md:pt-20">
         <div className="relative isolate flex min-h-[78svh] flex-col justify-between overflow-hidden rounded-2xl bg-navy text-white">
-          <Image src={s.image} alt={s.imageAlt} fill priority sizes="100vw" className="hero-zoom -z-10 object-cover" />
+          <img src={s.image} alt={s.imageAlt} className="absolute inset-0 size-full hero-zoom -z-10 object-cover" fetchPriority="high" decoding="async" />
           <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep/90 via-navy/30 to-navy-deep/50" />
           <div className="container-x pt-10">
             <Breadcrumbs items={crumbs} tone="dark" />
           </div>
           <div className="container-x pb-12 md:pb-16">
-            <p className="eyebrow flex items-center gap-3 text-cyan">
-              <span aria-hidden className="h-px w-8 bg-current" />
+            <p className="eyebrow text-cyan">
               Service {s.n} — {s.eyebrow}
             </p>
             <h1 className="text-display mt-6 max-w-4xl">
@@ -94,7 +92,7 @@ function ServiceHero({ s, variant }: { s: Service; variant: Variant }) {
         </div>
         <Reveal y={40} className="mt-14 px-3 md:mt-20 md:px-5">
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl md:aspect-[24/9]">
-            <Image src={s.image} alt={s.imageAlt} fill priority sizes="100vw" className="object-cover" />
+            <img src={s.image} alt={s.imageAlt} className="absolute inset-0 size-full object-cover" fetchPriority="high" decoding="async" />
           </div>
         </Reveal>
       </section>
@@ -106,8 +104,7 @@ function ServiceHero({ s, variant }: { s: Service; variant: Variant }) {
       <div className="container-x grid gap-12 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-6">
           <Breadcrumbs items={crumbs} />
-          <p className="eyebrow mt-12 flex items-center gap-3 text-blue">
-            <span aria-hidden className="h-px w-8 bg-current" />
+          <p className="eyebrow mt-12 text-blue">
             Service {s.n} — {s.eyebrow}
           </p>
           <h1 className="text-display mt-6 text-ink">
@@ -122,7 +119,7 @@ function ServiceHero({ s, variant }: { s: Service; variant: Variant }) {
         </div>
         <Reveal y={40} className="lg:col-span-6">
           <div className="relative aspect-[4/5] overflow-hidden rounded-xl md:aspect-[5/4] lg:aspect-[4/5]">
-            <Image src={s.image} alt={s.imageAlt} fill priority sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
+            <img src={s.image} alt={s.imageAlt} className="absolute inset-0 size-full object-cover" fetchPriority="high" decoding="async" />
           </div>
         </Reveal>
       </div>
@@ -246,7 +243,7 @@ function Related({ s }: { s: Service }) {
             <Reveal as="li" key={r.slug} delay={i * 0.08}>
               <Link href={`/services/${r.slug}`} className="group block">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
-                  <Image src={r.image} alt={r.imageAlt} fill sizes="(min-width: 768px) 420px, 100vw" className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-105" />
+                  <img src={r.image} alt={r.imageAlt} className="absolute inset-0 size-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-105" loading="lazy" decoding="async" />
                 </div>
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>

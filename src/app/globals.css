@@ -80,11 +80,91 @@
     opacity 0.6s ease calc(var(--d, 0s) + var(--i, 0) * 0.022s);
 }
 
-/* Timeline rail draws itself */
-.rail { transform-origin: top; transition: transform 1.8s var(--ease-out-expo); }
-@media (width >= 64rem) { .rail { transform-origin: left; } }
-.motion-ready [data-reveal="rail"]:not(.in) .rail { transform: scaleY(0); }
-@media (width >= 64rem) { .motion-ready [data-reveal="rail"]:not(.in) .rail { transform: scaleX(0); } }
+/* Process timeline. On desktop the rail runs from Step 1 to the Step 6 pill
+   (columns are 1/6 of the row plus a 1.5rem gap, so Step 6 starts at
+   5/6 × (100% + 1.5rem)); the bar's length follows --n, the steps reached. */
+.process-bar {
+  height: min(calc(var(--n, 0) / 6 * 100%), 100%);
+  transition-property: width, height;
+  transition-timing-function: linear;
+}
+@media (width >= 64rem) {
+  .process-rail { width: calc(5 / 6 * (100% + 1.5rem)); }
+  .process-bar { height: 1px; width: min(calc(var(--n, 0) / 5 * 100%), 100%); }
+}
+
+/* Very subtle film grain over dark sections (an inline SVG noise tile). */
+.bg-noise { position: relative; isolation: isolate; }
+.bg-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* Apple-style glass icon circles on the dark timeline: translucent fill,
+   blur, a white gradient rim and a soft top highlight. Active adds a cyan glow. */
+.icon-glass {
+  border-color: transparent;
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0.03));
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  backdrop-filter: blur(12px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25), 0 8px 20px -10px rgb(0 0 0 / 0.6);
+}
+.icon-glass::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.08) 55%, rgb(255 255 255 / 0.35));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.icon-glass-active {
+  background: linear-gradient(160deg, rgb(0 160 214 / 0.32), rgb(0 160 214 / 0.08));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35), 0 0 0 4px rgb(0 160 214 / 0.12), 0 10px 24px -10px rgb(0 160 214 / 0.6);
+}
+.icon-glass-active::before {
+  background: linear-gradient(135deg, rgb(255 255 255 / 0.9), rgb(0 160 214 / 0.5) 55%, rgb(255 255 255 / 0.6));
+}
+
+/* Apple-style frosted glass pills on the dark timeline. The glass tint sits on a
+   solid navy base so the rail line behind the pill never shows through. */
+.pill-glass {
+  border-color: rgb(255 255 255 / 0.14);
+  background: linear-gradient(rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.07)), var(--color-navy);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  backdrop-filter: blur(10px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16);
+}
+/* Passed steps: brighter glass with a white gradient rim */
+.pill-glass-done {
+  border-color: transparent;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.18), rgb(255 255 255 / 0.06)), var(--color-navy);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35), 0 6px 18px -8px rgb(0 0 0 / 0.55);
+}
+.pill-glass-done::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgb(255 255 255 / 0.95), rgb(255 255 255 / 0.2) 50%, rgb(255 255 255 / 0.75));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
 
 /* Scroll-scrubbed words (opacity set by GSAP) */
 .sw { transition: color 0.2s; }
@@ -97,9 +177,8 @@
 /* Marquee */
 .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 .marquee-track { display: flex; width: max-content; animation: marquee var(--speed, 40s) linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
-.marquee-row { display: flex; gap: 0.6em; padding-right: 0.6em; }
-.marquee-dot { width: 0.22em; height: 0.22em; border-radius: 999px; background: var(--color-cyan); display: inline-block; }
+.marquee-row { display: flex; gap: 1em; padding-right: 1em; }
+.marquee-dot { width: 0.4em; height: 0.4em; flex-shrink: 0; border-radius: 999px; background: var(--color-cyan); display: inline-block; }
 @keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
 
 /* Preloader */
@@ -153,12 +232,13 @@ html.lenis, html.lenis body { height: auto; }
   padding-block: clamp(4rem, 9vw, 9rem);
 }
 
+/* Small section labels: title case ("What We Do"), not all-caps. */
 @utility eyebrow {
   font-family: var(--font-display);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
 }
 
 @utility text-display {

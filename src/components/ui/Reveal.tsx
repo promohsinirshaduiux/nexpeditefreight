@@ -96,11 +96,23 @@ export function CountUp({ value, suffix = "", className }: { value: number; suff
 }
 
 /** Infinite horizontal ticker. */
-export function Marquee({ items, className = "", speed = 40 }: { items: string[]; className?: string; speed?: number }) {
+export function Marquee({
+  items,
+  className = "",
+  speed = 40,
+  repeat = 1,
+}: {
+  items: string[];
+  className?: string;
+  speed?: number;
+  /** Repeat the items within each row so short lists still fill wide screens. */
+  repeat?: number;
+}) {
+  const filled = Array.from({ length: repeat }, () => items).flat();
   const row = (
     <ul className="marquee-row" aria-hidden>
-      {items.map((t, i) => (
-        <li key={i} className="flex items-center gap-[0.6em]">
+      {filled.map((t, i) => (
+        <li key={i} className="flex items-center gap-[1em]">
           <span>{t}</span>
           <span className="marquee-dot" />
         </li>

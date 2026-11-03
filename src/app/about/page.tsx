@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { Eyebrow } from "@/components/ui/primitives";
 import { LineReveal, Reveal } from "@/components/ui/Reveal";
@@ -32,7 +31,7 @@ export default function AboutPage() {
         </div>
         <div className="container-x mt-14 grid gap-5 md:mt-20 md:grid-cols-12">
           <Reveal y={40} className="relative aspect-[4/3] overflow-hidden rounded-xl md:col-span-8 md:aspect-auto md:min-h-[520px]">
-            <Image src="/images/port-dawn.jpg" alt="Gantry cranes and a container ship at a port at dawn" fill priority sizes="(min-width: 768px) 840px, 100vw" className="object-cover" />
+            <img src="/images/port-dawn.jpg" alt="Gantry cranes and a container ship at a port at dawn" className="absolute inset-0 size-full object-cover" fetchPriority="high" decoding="async" />
           </Reveal>
           <Reveal y={40} delay={0.1} className="flex flex-col justify-between gap-10 rounded-xl bg-navy p-8 text-white md:col-span-4 md:p-10">
             <p className="eyebrow text-cyan">Quick facts</p>
@@ -183,7 +182,7 @@ export default function AboutPage() {
 
       {/* 08 — Network */}
       <section className="relative isolate overflow-hidden bg-navy text-white">
-        <Image src="/images/terminal-aerial.jpg" alt="" fill sizes="100vw" className="-z-10 object-cover opacity-50" />
+        <img src="/images/terminal-aerial.jpg" alt="" className="absolute inset-0 size-full -z-10 object-cover opacity-50" loading="lazy" decoding="async" />
         <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-navy via-navy/80 to-navy/20" />
         <div className="container-x section-y grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-6">

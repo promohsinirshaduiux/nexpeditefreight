@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import type { ReactNode } from "react";
@@ -90,7 +89,6 @@ export function PageHero({
             delay={0.3}
             amount={12}
             className="aspect-[16/9] rounded-xl md:aspect-[21/9]"
-            sizes="(min-width: 1280px) 1280px, 100vw"
           />
         </div>
       )}
@@ -162,7 +160,7 @@ export function CtaBand({
   return (
     <section className="relative isolate overflow-hidden bg-navy text-white">
       <div className="absolute inset-x-0 -inset-y-[20%] -z-10" data-parallax="10">
-        <Image src="/images/ocean-aerial.jpg" alt="" fill sizes="100vw" className="object-cover opacity-35" />
+        <img src="/images/ocean-aerial.jpg" alt="" className="absolute inset-0 size-full object-cover opacity-35" loading="lazy" decoding="async" />
       </div>
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-navy via-navy/90 to-navy/40" />
       <div className="container-x section-y grid gap-10 lg:grid-cols-12 lg:items-end">

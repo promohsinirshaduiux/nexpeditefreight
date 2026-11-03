@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { CSSProperties } from "react";
 
 /**
@@ -9,7 +8,6 @@ export function ParallaxImage({
   src,
   alt,
   className = "",
-  sizes = "100vw",
   priority,
   amount = 10,
   delay = 0,
@@ -18,7 +16,6 @@ export function ParallaxImage({
   src: string;
   alt: string;
   className?: string;
-  sizes?: string;
   priority?: boolean;
   amount?: number;
   delay?: number;
@@ -32,7 +29,7 @@ export function ParallaxImage({
       style={{ "--d": `${delay}s` } as CSSProperties}
     >
       <div className="absolute inset-x-0 -inset-y-[14%]" data-parallax={amount}>
-        <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
+        <img src={src} alt={alt} className="absolute inset-0 size-full object-cover" fetchPriority={priority ? "high" : "auto"} loading={priority ? "eager" : "lazy"} decoding="async" />
       </div>
     </div>
   );

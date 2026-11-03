@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { Eyebrow } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/Reveal";
@@ -52,10 +51,10 @@ export default function IndustriesPage() {
 
       {/* Showcase */}
       <section className="bg-white pb-[clamp(4rem,9vw,9rem)]">
-        <div className="container-x grid gap-5 md:grid-cols-3">
+        <div className="container-x grid gap-5 md:h-[540px] md:grid-cols-3 md:grid-rows-2">
           {Object.entries(showcaseImages).map(([name, img], i) => (
-            <Reveal key={name} delay={i * 0.08} className={`relative overflow-hidden rounded-xl ${i === 0 ? "md:col-span-2 aspect-[4/3] md:aspect-auto md:min-h-[480px]" : "aspect-[4/3] md:aspect-auto"}`}>
-              <Image src={img.src} alt={img.alt} fill sizes="(min-width: 768px) 60vw, 100vw" className="object-cover" />
+            <Reveal key={name} delay={i * 0.08} className={`relative overflow-hidden rounded-xl ${i === 0 ? "aspect-[4/3] md:col-span-2 md:row-span-2 md:aspect-auto" : "aspect-[4/3] md:aspect-auto"}`}>
+              <img src={img.src} alt={img.alt} className="absolute inset-0 size-full object-cover" loading="lazy" decoding="async" />
               <span className="absolute bottom-5 left-5 rounded-full bg-white/90 px-4 py-2 font-display text-sm font-semibold text-navy backdrop-blur">{name}</span>
             </Reveal>
           ))}

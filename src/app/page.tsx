@@ -1,9 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Button, Eyebrow, TextLink } from "@/components/ui/primitives";
 import { CountUp, LineReveal, Marquee, Reveal, ScrubWords, SplitChars } from "@/components/ui/Reveal";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
+import { LoopVideo } from "@/components/ui/LoopVideo";
+import { IndustryIcon } from "@/components/ui/IndustryIcon";
 import { CtaBand, SectionHeading } from "@/components/sections/common";
 import { ServicesGallery } from "@/components/sections/ServicesGallery";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
@@ -17,14 +18,10 @@ export default function HomePage() {
       <section className="relative bg-white px-3 pt-[72px] md:px-5 md:pt-20">
         <div className="relative isolate flex min-h-[calc(100svh-84px)] flex-col overflow-hidden rounded-2xl bg-navy text-white md:min-h-[max(680px,calc(100svh-100px))]">
           <div data-hero-media className="absolute inset-0 -z-10 origin-bottom">
-            <Image
+            <img
               src="/images/hero-port.jpg"
               alt="Container ship leaving a commercial port at blue hour"
-              fill
-              priority
-              sizes="100vw"
-              className="hero-zoom object-cover object-[70%_center]"
-            />
+              className="absolute inset-0 size-full hero-zoom object-cover object-[70%_center]" fetchPriority="high" decoding="async" />
           </div>
           <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep/90 via-transparent to-navy-deep/40" />
           <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-deep/70 via-transparent to-transparent" />
@@ -32,9 +29,14 @@ export default function HomePage() {
           <div data-hero-fade className="container-x flex flex-1 flex-col justify-between gap-16 pt-16 pb-10 md:pt-24 md:pb-16">
             <div>
               <Reveal hero y={16} delay={0.1}>
-                <p className="eyebrow flex items-center gap-3 text-cyan">
-                  <span aria-hidden className="h-px w-8 bg-current" />
-                  {site.tagline}
+                <p className="eyebrow flex flex-wrap items-center gap-x-2 gap-y-1 text-cyan">
+                  {["Your Cargo", "Our Commitment", "Delivered"].map((part, i) => (
+                    <span key={part} className="flex items-center gap-x-2">
+                      {i > 0 && <span aria-hidden className="size-1 rounded-full bg-white" />}
+                      {part}
+                      <span className="sr-only">.</span>
+                    </span>
+                  ))}
                 </p>
               </Reveal>
               <h1 className="mt-6 max-w-5xl font-display text-[clamp(3rem,8vw,6.75rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
@@ -64,7 +66,7 @@ export default function HomePage() {
       {/* 02 — Trust strip */}
       <section aria-label="Company at a glance" className="bg-white">
         <div className="container-x">
-          <dl className="grid divide-y divide-line border-b border-line md:grid-cols-3 md:divide-x md:divide-y-0">
+          <dl className="grid divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
             {[
               { k: <CountUp value={30} suffix="+" />, unit: "Years", v: "Industry experience behind our leadership" },
               { k: <CountUp value={6} />, unit: "Core services", v: "Ocean, air, road, customs, warehousing & project cargo" },
@@ -83,9 +85,11 @@ export default function HomePage() {
       </section>
 
       {/* Marquee */}
-      <section aria-label="Our services" className="border-b border-line bg-white py-8 md:py-10">
+      <section aria-label="Our services" className="border-y border-line bg-white py-4 md:py-5">
         <Marquee
-          className="font-display text-[clamp(2.25rem,5vw,4.5rem)] font-semibold leading-none tracking-[-0.03em] text-navy"
+          className="font-display text-[clamp(0.9375rem,1.25vw,1.125rem)] font-medium leading-[1.3] tracking-normal text-navy"
+          repeat={3}
+          speed={55}
           items={["Ocean Freight", "Air Freight", "Road Transportation", "Customs Clearance", "Warehousing & Distribution", "Project Cargo"]}
         />
       </section>
@@ -98,17 +102,16 @@ export default function HomePage() {
               src="/images/terminal-aerial.jpg"
               alt="Aerial view of an organised container terminal yard"
               className="aspect-[4/5] rounded-xl"
-              sizes="(min-width: 1024px) 620px, 100vw"
             />
             <Reveal delay={0.5} className="absolute -bottom-6 right-4 max-w-[15rem] rounded-lg bg-white p-5 shadow-[0_20px_40px_-24px_rgba(12,32,65,0.35)] md:-right-8 md:p-6">
               <p className="font-display text-sm font-semibold text-blue">Founded {site.founded}</p>
               <p className="mt-1 text-[0.9375rem] leading-snug text-ink">New company. Established experience.</p>
             </Reveal>
           </div>
-          <div className="lg:col-span-5 lg:col-start-8">
+          <div className="lg:col-span-6 lg:col-start-7 lg:pl-6">
             <Eyebrow>About Nexpedite</Eyebrow>
-            <h2 className="text-h2 mt-6">
-              <LineReveal lines={["Built on experience.", "Driven by commitment."]} />
+            <h2 className="text-h2 mt-6 lg:whitespace-nowrap">
+              <LineReveal lines={["Built on experience.", "Driven by", "commitment."]} />
             </h2>
             <Reveal delay={0.15}>
               <p className="text-lead mt-8 text-ink">
@@ -147,10 +150,10 @@ export default function HomePage() {
       {/* 05 — Why Nexpedite */}
       <section className="section-y bg-white">
         <div className="container-x grid gap-14 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-32">
               <Eyebrow>Why Nexpedite Freight</Eyebrow>
-              <h2 className="text-h2 mt-6">
+              <h2 className="text-h2 mt-6 lg:whitespace-nowrap">
                 <LineReveal lines={["Experience that", "makes the", "difference."]} />
               </h2>
               <Reveal delay={0.15}>
@@ -161,7 +164,7 @@ export default function HomePage() {
               </Reveal>
             </div>
           </div>
-          <ol className="border-t border-line lg:col-span-7 lg:col-start-6">
+          <ol className="border-t border-line lg:col-span-6 lg:col-start-7">
             {differentiators.map((d, i) => (
               <Reveal as="li" key={d.title} delay={i * 0.05} className="group grid gap-4 border-b border-line py-10 md:grid-cols-[7rem_1fr] md:py-14">
                 <span className="font-display text-[clamp(3rem,5vw,4.5rem)] font-semibold leading-none tracking-[-0.05em] text-transparent transition-colors duration-500 [-webkit-text-stroke:1px_var(--color-blue)] group-hover:text-blue">
@@ -196,25 +199,52 @@ export default function HomePage() {
                 src="/images/textile.jpg"
                 alt="Export-ready textile bales stacked on pallets"
                 className="mt-14 hidden aspect-[4/3] rounded-xl lg:block"
-                sizes="520px"
                 delay={0.1}
               />
             </div>
             <ul className="grid grid-cols-2 self-end border-l border-t border-line bg-white lg:col-span-6 lg:col-start-7">
               {industries.map((ind, i) => (
-                <Reveal as="li" key={ind.name} delay={(i % 2) * 0.08 + Math.floor(i / 2) * 0.06} className="border-b border-r border-line">
+                <Reveal as="li" key={ind.slug} delay={(i % 2) * 0.08 + Math.floor(i / 2) * 0.06} className="border-b border-r border-line">
                   <Link
-                    href={`/industries#${ind.name.toLowerCase().replace(/\s+/g, "-")}`}
+                    href={`/industries#${ind.slug}`}
                     className="group relative flex h-full min-h-[150px] flex-col justify-between overflow-hidden p-5 md:min-h-[190px] md:p-7"
                   >
-                    <span aria-hidden className="absolute inset-0 origin-bottom scale-y-0 bg-navy transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-y-100" />
-                    <span className="relative flex items-center justify-between font-display text-xs font-semibold text-blue tabular-nums transition-colors group-hover:text-cyan">
-                      {String(i + 1).padStart(2, "0")}
-                      <ArrowUpRight aria-hidden className="size-4 -translate-x-2 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100" />
+                    {/* Hover: the industry photo fades in under a navy wash so the text stays readable */}
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100"
+                    >
+                      <img
+                        src={ind.image}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="absolute inset-0 size-full scale-110 object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-100"
+                      />
+                      <span className="absolute inset-0 bg-gradient-to-t from-navy-deep/95 via-navy/75 to-navy/45" />
+                    </span>
+                    <span className="relative flex items-start justify-between">
+                      {/* On hover the icon sits on frosted glass: blur, translucent fill, light rim and top highlight */}
+                      <span className="flex size-12 items-center justify-center rounded-full border border-line text-blue transition-[background-color,border-color,color,box-shadow] duration-500 group-hover:border-white/35 group-hover:bg-white/15 group-hover:text-white group-hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_8px_24px_-8px_rgba(8,22,49,0.6)] group-hover:backdrop-blur-md group-hover:backdrop-saturate-150">
+                        <IndustryIcon slug={ind.slug} className="size-[22px]" />
+                      </span>
+                      <ArrowUpRight
+                        aria-hidden
+                        className="size-4 -translate-x-2 text-white opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100"
+                      />
                     </span>
                     <span className="relative">
                       <span className="block font-display text-xl font-semibold tracking-tight text-ink transition-colors group-hover:text-white md:text-2xl">{ind.name}</span>
-                      <span className="mt-1 block text-[0.8125rem] text-muted transition-colors group-hover:text-white/70">{ind.modes.join(" · ")}</span>
+                      <span className="mt-3 flex flex-wrap gap-1.5">
+                        {ind.modes.map((m) => (
+                          <span
+                            key={m}
+                            className="rounded-full border border-line px-2.5 py-0.5 text-[0.75rem] leading-5 text-muted transition-colors duration-500 group-hover:border-white/30 group-hover:bg-white/10 group-hover:text-white group-hover:backdrop-blur-sm"
+                          >
+                            {m}
+                          </span>
+                        ))}
+                      </span>
                     </span>
                   </Link>
                 </Reveal>
@@ -225,7 +255,7 @@ export default function HomePage() {
       </section>
 
       {/* 07 — How we work */}
-      <section className="section-y bg-navy text-white">
+      <section className="bg-noise section-y bg-navy text-white">
         <div className="container-x">
           <SectionHeading
             tone="dark"
@@ -259,12 +289,11 @@ export default function HomePage() {
             </Reveal>
           </div>
           <div className="relative mt-14 md:mt-20">
-            <ParallaxImage
-              src="/images/ocean-aerial.jpg"
-              alt="Aerial view of a container ship crossing open ocean"
+            <LoopVideo
+              src="/videos/ocean-reach.mp4"
+              poster="/images/ocean-aerial.jpg"
+              label="Aerial footage of a container ship crossing open ocean"
               className="aspect-[4/3] rounded-xl md:aspect-[21/9]"
-              sizes="(min-width: 1280px) 1280px, 100vw"
-              amount={14}
             />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 rounded-b-xl bg-gradient-to-t from-navy-deep/85 to-transparent p-6 pt-24 md:p-10 md:pt-40">
               <Reveal delay={0.4}>
@@ -274,12 +303,15 @@ export default function HomePage() {
               </Reveal>
             </div>
           </div>
-          <ul className="mt-12 grid gap-8 border-t border-line pt-10 md:grid-cols-3">
+          {/* Three bordered cells, styled like the industry tiles */}
+          <ul className="mt-12 grid border-l border-t border-line md:grid-cols-3">
             {["Carrier and agent relationships built over decades", "Coordination across major international trade lanes", "Reliable routing for ocean, air and road shipments"].map(
               (t, i) => (
-                <Reveal as="li" key={t} delay={i * 0.08} className="flex gap-4">
-                  <span className="font-display text-sm font-semibold text-blue tabular-nums">0{i + 1}</span>
-                  <span className="text-ink">{t}</span>
+                <Reveal as="li" key={t} delay={i * 0.08} className="flex min-h-[170px] flex-col justify-between gap-8 border-b border-r border-line bg-white p-6 md:min-h-[200px] md:p-8">
+                  <span aria-hidden className="font-display text-[3.5rem] font-bold leading-none tracking-[-0.04em] text-navy/10 tabular-nums">
+                    0{i + 1}
+                  </span>
+                  <span className="max-w-xs font-display text-xl leading-snug text-ink">{t}</span>
                 </Reveal>
               ),
             )}

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Eyebrow } from "@/components/ui/primitives";
@@ -25,8 +24,8 @@ export function ServicesGallery() {
               <p className="text-lead text-white/70">
                 Six core services, planned together and managed by the same team — so your cargo moves without gaps between providers.
               </p>
-              <p className="mt-10 hidden items-center gap-3 text-sm text-white/50 lg:flex">
-                <span className="h-px w-10 bg-white/30" /> Scroll to explore
+              <p className="mt-10 hidden text-sm text-white/50 lg:block">
+                Scroll to explore
               </p>
             </Reveal>
           </div>
@@ -37,13 +36,10 @@ export function ServicesGallery() {
               data-cursor="View"
               className="group relative isolate flex h-[64vh] min-h-[440px] w-[78vw] shrink-0 snap-start flex-col justify-end overflow-hidden rounded-xl p-7 sm:w-[400px] md:p-9 lg:h-[72vh] lg:w-[min(34vw,500px)]"
             >
-              <Image
+              <img
                 src={s.image}
                 alt={s.imageAlt}
-                fill
-                sizes="(min-width: 1024px) 500px, 80vw"
-                className="-z-10 object-cover transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-[1.07]"
-              />
+                className="absolute inset-0 size-full -z-10 object-cover transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-[1.07]" loading="lazy" decoding="async" />
               <span aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent transition-opacity duration-700 group-hover:opacity-90" />
               <span className="absolute left-7 top-7 font-display text-[4.5rem] font-semibold leading-none tracking-[-0.05em] text-white/20 md:left-9 md:top-8">{s.n}</span>
               <span className="absolute right-7 top-7 flex size-11 items-center justify-center rounded-full border border-white/40 transition-all duration-500 group-hover:rotate-45 group-hover:border-white group-hover:bg-white group-hover:text-navy md:right-9 md:top-9">

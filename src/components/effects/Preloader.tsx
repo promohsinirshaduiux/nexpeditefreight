@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -59,7 +58,7 @@ export function Preloader() {
       </div>
       <div className="flex items-center justify-center">
         <div className="relative size-20 overflow-hidden rounded-full bg-white p-2 md:size-24">
-          <Image src="/brand/icon.png" alt="" width={96} height={96} priority className="size-full object-contain" />
+          <img src="/brand/icon.png" alt="" width={96} height={96} className="size-full object-contain" fetchPriority="high" decoding="async" />
         </div>
       </div>
       <div>

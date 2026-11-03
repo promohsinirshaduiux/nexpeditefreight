@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, ChevronDown, Menu, Plus, X } from "lucide-react";
@@ -234,7 +233,7 @@ function ServicesPanel({ onNavigate }: { onNavigate: () => void }) {
   return (
     <div className="grid w-[720px] grid-cols-[260px_1fr]">
       <Link href={overview.href} onClick={onNavigate} className="group relative flex min-h-[300px] flex-col justify-end overflow-hidden bg-navy p-6 text-white">
-        <Image src="/images/containers-abstract.jpg" alt="" fill sizes="260px" className="object-cover opacity-50 transition-transform duration-700 group-hover:scale-105" />
+        <img src="/images/containers-abstract.jpg" alt="" className="absolute inset-0 size-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
         <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-transparent" />
         <span className="relative eyebrow text-cyan">Overview</span>
         <span className="relative mt-2 font-display text-xl font-semibold leading-tight">Six freight solutions, one accountable team.</span>

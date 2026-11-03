@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
@@ -40,13 +39,10 @@ export default function ServicesPage() {
               <Reveal as="li" key={s.slug} delay={(i % 3) * 0.08}>
                 <Link href={`/services/${s.slug}`} className="group block">
                   <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
-                    <Image
+                    <img
                       src={s.image}
                       alt={s.imageAlt}
-                      fill
-                      sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-105"
-                    />
+                      className="absolute inset-0 size-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-105" loading="lazy" decoding="async" />
                     <span className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1 font-display text-xs font-semibold text-navy tabular-nums backdrop-blur">
                       {s.n}
                     </span>
@@ -98,7 +94,7 @@ export default function ServicesPage() {
       <section className="section-y bg-white">
         <div className="container-x grid gap-12 lg:grid-cols-12 lg:items-center">
           <Reveal y={40} className="relative aspect-[4/5] overflow-hidden rounded-xl lg:col-span-5">
-            <Image src="/images/port-dawn.jpg" alt="Port cranes and a docked container ship at dawn" fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
+            <img src="/images/port-dawn.jpg" alt="Port cranes and a docked container ship at dawn" className="absolute inset-0 size-full object-cover" loading="lazy" decoding="async" />
           </Reveal>
           <div className="lg:col-span-6 lg:col-start-7">
             <Eyebrow>Integrated approach</Eyebrow>

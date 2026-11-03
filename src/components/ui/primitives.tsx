@@ -1,17 +1,18 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
 
 /** Official logo artwork — rendered as supplied, never redrawn. */
 export function Logo({ className = "", priority = false }: { className?: string; priority?: boolean }) {
   return (
-    <Image
+    <img
       src="/brand/logo.png"
       alt="Nexpedite Freight — Your Freight Partner"
       width={1859}
       height={362}
-      priority={priority}
+      fetchPriority={priority ? "high" : "auto"}
+      loading={priority ? "eager" : "lazy"}
+      decoding="async"
       className={`h-auto w-[168px] md:w-[196px] ${className}`}
     />
   );
@@ -74,8 +75,7 @@ export function TextLink({ href, children, className = "", ...rest }: ComponentP
 export function Eyebrow({ children, tone = "blue", className = "" }: { children: ReactNode; tone?: "blue" | "cyan" | "muted"; className?: string }) {
   const color = tone === "cyan" ? "text-cyan" : tone === "muted" ? "text-muted" : "text-blue";
   return (
-    <p className={`eyebrow flex items-center gap-3 ${color} ${className}`}>
-      <span aria-hidden className="h-px w-8 bg-current" />
+    <p className={`eyebrow ${color} ${className}`}>
       {children}
     </p>
   );

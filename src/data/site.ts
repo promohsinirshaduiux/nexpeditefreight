@@ -78,12 +78,13 @@ export function contactLinks(): (NavLink & { icon: "page" | "mail" | "phone" | "
 }
 
 export const processSteps = [
-  { n: "01", title: "Inquiry", text: "Share your cargo and shipment details with our team — what it is, where it is and where it needs to go." },
-  { n: "02", title: "Quotation", text: "We prepare a clear, cost-effective quotation with the routing and carrier options that fit your shipment." },
-  { n: "03", title: "Booking", text: "Once you confirm, we book carriers, secure space and set the schedule." },
-  { n: "04", title: "Documentation", text: "We prepare and manage the required paperwork so your cargo is ready for every checkpoint." },
-  { n: "05", title: "Shipment", text: "Your cargo moves, with direct updates from the people managing it throughout." },
-  { n: "06", title: "Delivery", text: "Safe delivery to the final destination, closed out with the same attention it started with." },
+  // Kept short: the timeline shows each step in a narrow column, two lines at most.
+  { n: "01", title: "Inquiry", text: "Share your cargo and route details." },
+  { n: "02", title: "Quotation", text: "A clear quote with the right route." },
+  { n: "03", title: "Booking", text: "We book carriers and set the schedule." },
+  { n: "04", title: "Documentation", text: "Paperwork ready for every checkpoint." },
+  { n: "05", title: "Shipment", text: "Your cargo moves, with direct updates." },
+  { n: "06", title: "Delivery", text: "Safe delivery to the final destination." },
 ];
 
 export const coreValues = [
