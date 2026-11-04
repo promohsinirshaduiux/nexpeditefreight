@@ -44,7 +44,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="group inline-flex min-h-12 items-center gap-2.5 rounded-full border border-line bg-white px-5 text-[0.9375rem] font-medium text-ink transition-colors duration-300 hover:border-whatsapp hover:bg-whatsapp hover:text-white"
               >
-                <WhatsAppLogo className="size-5 transition-transform duration-300 group-hover:scale-110" />
+                <WhatsAppLogo invertOnHover className="size-5 transition-transform duration-300 group-hover:scale-110" />
                 WhatsApp
               </a>
             </li>

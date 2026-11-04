@@ -91,15 +91,16 @@ export function WhatsAppIcon({ className = "size-5" }: { className?: string }) {
 }
 
 /** Full-colour WhatsApp logo (green bubble, white handset) for use on dark or neutral backgrounds. */
-export function WhatsAppLogo({ className = "size-5" }: { className?: string }) {
+/** Full-colour WhatsApp mark. `invertOnHover` swaps to a white bubble with a green phone when its `.group` is hovered (for green hover backgrounds). */
+export function WhatsAppLogo({ className = "size-5", invertOnHover = false }: { className?: string; invertOnHover?: boolean }) {
   return (
     <svg viewBox="0 0 32 32" aria-hidden className={className}>
       <path
-        fill="#25D366"
+        className={`fill-[#25D366] transition-[fill] duration-300 ${invertOnHover ? "group-hover:fill-white" : ""}`}
         d="M16 2.67C8.64 2.67 2.67 8.64 2.67 16c0 2.35.62 4.64 1.79 6.66L2.67 29.33l6.85-1.76A13.28 13.28 0 0 0 16 29.33c7.36 0 13.33-5.97 13.33-13.33S23.36 2.67 16 2.67z"
       />
       <path
-        fill="#fff"
+        className={`fill-white transition-[fill] duration-300 ${invertOnHover ? "group-hover:fill-[#25D366]" : ""}`}
         d="M22.73 19.29c-.37-.18-2.17-1.07-2.5-1.19-.34-.12-.58-.18-.83.18-.24.37-.95 1.19-1.17 1.44-.21.24-.43.27-.8.09-.37-.18-1.55-.57-2.96-1.83-1.09-.98-1.83-2.18-2.04-2.55-.21-.37-.02-.57.16-.75.17-.16.37-.43.55-.64.18-.21.24-.37.37-.61.12-.25.06-.46-.03-.64-.09-.18-.83-2-1.13-2.74-.3-.72-.6-.62-.83-.63h-.71c-.24 0-.64.09-.98.46-.33.37-1.28 1.25-1.28 3.05s1.31 3.54 1.5 3.79c.18.24 2.58 3.94 6.25 5.52.87.38 1.55.6 2.08.77.88.28 1.67.24 2.3.15.7-.11 2.17-.89 2.47-1.74.31-.86.31-1.59.21-1.74-.09-.15-.33-.24-.7-.43z"
       />
     </svg>

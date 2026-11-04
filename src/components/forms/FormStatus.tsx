@@ -34,9 +34,9 @@ export function FormStatus({ state }: { state: SubmitState }) {
 
 export function SuccessPanel({ title, text, onReset }: { title: string; text: string; onReset: () => void }) {
   return (
-    <div role="status" aria-live="polite" className="flex flex-col items-start rounded-xl border border-line bg-off p-8 md:p-12">
-      <span className="flex size-12 items-center justify-center rounded-full bg-blue/10 text-blue">
-        <CheckCircle2 aria-hidden className="size-6" />
+    <div role="status" aria-live="polite" className="flex flex-col items-start rounded-[1.5rem] bg-white p-8 shadow-[0_18px_44px_-22px_rgba(12,32,65,0.28)] md:p-12">
+      <span className="flex size-16 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+        <CheckCircle2 aria-hidden className="size-9" strokeWidth={2} />
       </span>
       <h2 className="mt-8 font-display text-3xl font-semibold tracking-tight">{title}</h2>
       <p className="mt-3 max-w-md text-muted">{text}</p>
