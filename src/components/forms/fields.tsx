@@ -1,8 +1,8 @@
 "use client";
 
-import { Check, ChevronDown } from "lucide-react";
+import { Check, ChevronDown, Package, Route, UserRound, type LucideIcon } from "lucide-react";
 import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
-import { forwardRef, useId } from "react";
+import { createElement, forwardRef, useId } from "react";
 
 const control =
   "w-full rounded-lg border bg-white px-4 text-[0.9375rem] text-ink placeholder:text-muted/70 transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4 focus:ring-blue/10 focus:border-blue aria-[invalid=true]:border-[#c4320a] aria-[invalid=true]:ring-[#c4320a]/10";
@@ -167,14 +167,20 @@ export function Honeypot(props: InputHTMLAttributes<HTMLInputElement>) {
   );
 }
 
+const fieldsetIcons: Record<string, LucideIcon> = { "01": UserRound, "02": Route, "03": Package };
+
+/** Form section with an icon heading; `n` picks the icon for that step. */
 export function Fieldset({ legend, n, children }: { legend: string; n: string; children: ReactNode }) {
   return (
-    <fieldset className="border-t border-line pt-8 first:border-t-0 first:pt-0">
-      <legend className="mb-6 flex items-baseline gap-3">
-        <span className="font-display text-xs font-semibold text-blue tabular-nums">{n}</span>
-        <span className="font-display text-lg font-semibold text-ink">{legend}</span>
-      </legend>
-      {children}
-    </fieldset>
+    // The divider sits on a wrapper, above the section: a fieldset's own border is drawn through its legend.
+    <div className={n === "01" ? "" : "border-t border-gray-200 pt-6"}>
+      <fieldset>
+        <legend className="mb-4 flex items-center gap-3">
+          {createElement(fieldsetIcons[n] ?? Package, { "aria-hidden": true, className: "size-6 shrink-0 text-blue", strokeWidth: 1.75 })}
+          <span className="font-display text-xl font-semibold tracking-tight text-ink">{legend}</span>
+        </legend>
+        {children}
+      </fieldset>
+    </div>
   );
 }

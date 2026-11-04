@@ -18,11 +18,12 @@ export function Logo({ className = "", priority = false }: { className?: string;
   );
 }
 
-type ButtonVariant = "primary" | "outline" | "light" | "ghost-light" | "whatsapp";
+type ButtonVariant = "primary" | "outline" | "outline-blue" | "light" | "ghost-light" | "whatsapp";
 
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-blue text-white hover:bg-blue-dark",
   outline: "border border-ink/20 text-ink hover:border-ink hover:bg-ink hover:text-white",
+  "outline-blue": "border border-blue bg-white text-blue hover:bg-blue hover:text-white",
   light: "bg-white text-navy hover:bg-off",
   "ghost-light": "border border-white/35 text-white hover:border-white hover:bg-white hover:text-navy",
   whatsapp: "bg-whatsapp text-white hover:brightness-95",

@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { Eyebrow } from "@/components/ui/primitives";
-import { Breadcrumbs } from "@/components/sections/common";
 import { SectionNav } from "@/components/sections/SectionNav";
 
 export type LegalSection = { id: string; title: string; body: ReactNode };
@@ -11,8 +10,7 @@ export function LegalPage({ title, label, sections }: { title: string; label: st
     <>
       <section className="bg-white pt-28 md:pt-36">
         <div className="container-x">
-          <Breadcrumbs items={[{ label: "Resources" }, { label: title }]} />
-          <div className="mt-8 rounded-[1.75rem] bg-gray-100 px-6 py-10 md:px-12 md:py-14">
+          <div className="rounded-[1.75rem] bg-gray-100 px-6 py-10 md:px-12 md:py-14">
             <Eyebrow>{label}</Eyebrow>
             <h1 className="mt-3 font-display text-[clamp(2.25rem,5.6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-ink">{title}</h1>
             <p role="note" className="mt-8 rounded-lg border border-[#e8c96b] bg-[#fdf8e7] px-5 py-4 text-[0.9375rem] text-[#5c4708]">

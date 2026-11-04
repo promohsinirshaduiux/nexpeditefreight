@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowRight, ChevronDown, Menu, Plus, X } from "lucide-react";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { ArrowRight, Boxes, ChevronDown, Menu, Plane, Plus, Ship, ShieldCheck, Truck, Warehouse, Weight, X, type LucideIcon } from "lucide-react";
+import { createElement, useCallback, useEffect, useId, useRef, useState } from "react";
 import { Logo } from "@/components/ui/primitives";
 import { ChannelIcon } from "@/components/ui/SocialIcon";
-import { resourceLinks, serviceLinks, site, type NavLink } from "@/data/site";
+import { serviceLinks, site, type NavLink } from "@/data/site";
 
-type MenuKey = "services" | "resources";
+type MenuKey = "services";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -63,6 +63,7 @@ export function Header() {
               <NavItem href="/about" label="About Us" active={isActive("/about")} />
               <Dropdown
                 id="services"
+                href="/services"
                 label="Services"
                 active={isActive("/services")}
                 open={open === "services"}
@@ -72,15 +73,7 @@ export function Header() {
                 <ServicesPanel onNavigate={() => setOpen(null)} />
               </Dropdown>
               <NavItem href="/industries" label="Industries" active={isActive("/industries")} />
-              <Dropdown
-                id="resources"
-                label="Resources"
-                active={["/faqs", "/privacy-policy", "/terms-and-conditions"].some((p) => pathname.startsWith(p))}
-                open={open === "resources"}
-                setOpen={setOpen}
-              >
-                <SimplePanel links={resourceLinks} onNavigate={() => setOpen(null)} />
-              </Dropdown>
+              <NavItem href="/faqs" label="FAQs" active={isActive("/faqs")} />
               <NavItem href="/contact" label="Contact Us" active={isActive("/contact")} />
             </ul>
           </nav>
@@ -131,6 +124,7 @@ function NavItem({ href, label, active }: { href: string; label: string; active:
 function Dropdown({
   id,
   label,
+  href,
   active,
   open,
   setOpen,
@@ -140,6 +134,7 @@ function Dropdown({
 }: {
   id: MenuKey;
   label: string;
+  href: string;
   active: boolean;
   open: boolean;
   setOpen: (k: MenuKey | null | ((p: MenuKey | null) => MenuKey | null)) => void;
@@ -192,20 +187,29 @@ function Dropdown({
         if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen((p) => (p === id ? null : p));
       }}
     >
-      <button
-        ref={btn}
-        type="button"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={() => setOpen((p) => (p === id ? null : id))}
-        className={`relative inline-flex h-11 items-center gap-1.5 whitespace-nowrap px-3 text-[0.9375rem] xl:px-3.5 transition-colors hover:text-blue ${
-          active || open ? "text-blue" : "text-ink"
-        }`}
-      >
-        {label}
-        <ChevronDown aria-hidden className={`size-3.5 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+      {/* The label goes straight to its page; hovering (or the chevron, for keyboard and touch) opens the panel. */}
+      <div className={`relative inline-flex h-11 items-center whitespace-nowrap pl-3 xl:pl-3.5 ${active || open ? "text-blue" : "text-ink"}`}>
+        <Link
+          href={href}
+          onClick={() => setOpen(null)}
+          aria-current={active ? "page" : undefined}
+          className="text-[0.9375rem] transition-colors hover:text-blue"
+        >
+          {label}
+        </Link>
+        <button
+          ref={btn}
+          type="button"
+          aria-expanded={open}
+          aria-controls={panelId}
+          aria-label={`Show ${label} menu`}
+          onClick={() => setOpen((p) => (p === id ? null : id))}
+          className="inline-flex h-11 items-center pl-1.5 pr-3 transition-colors hover:text-blue xl:pr-3.5"
+        >
+          <ChevronDown aria-hidden className={`size-3.5 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        </button>
         {active && <span aria-hidden className="absolute inset-x-3.5 bottom-1.5 h-px bg-blue" />}
-      </button>
+      </div>
       <AnimatePresence>
         {open && (
           <motion.div
@@ -214,7 +218,7 @@ function Dropdown({
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, y: 6 }}
             transition={{ duration: 0.28, ease }}
-            className={`absolute top-full pt-3 ${align === "right" ? "right-0" : wide ? "-left-40" : "left-0"}`}
+            className={`absolute top-full pt-3 ${align === "right" ? "right-0" : wide ? "-left-72" : "left-0"}`}
           >
             <div className="overflow-hidden rounded-xl border border-line bg-white shadow-[0_24px_48px_-24px_rgba(12,32,65,0.25)]">
               {children}
@@ -226,10 +230,19 @@ function Dropdown({
   );
 }
 
+const serviceIcons: Record<string, LucideIcon> = {
+  "/services/ocean-freight": Ship,
+  "/services/air-freight": Plane,
+  "/services/road-transportation": Truck,
+  "/services/customs-clearance": ShieldCheck,
+  "/services/warehousing-distribution": Warehouse,
+  "/services/project-cargo": Weight,
+};
+
 function ServicesPanel({ onNavigate }: { onNavigate: () => void }) {
   const [overview, ...items] = serviceLinks;
   return (
-    <div className="grid w-[720px] grid-cols-[260px_1fr]">
+    <div className="grid w-[860px] grid-cols-[240px_1fr]">
       <Link href={overview.href} onClick={onNavigate} className="group relative flex min-h-[300px] flex-col justify-end overflow-hidden bg-navy p-6 text-white">
         <img src="/images/containers-abstract.jpg" alt="" className="absolute inset-0 size-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
         <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-transparent" />
@@ -240,34 +253,21 @@ function ServicesPanel({ onNavigate }: { onNavigate: () => void }) {
         </span>
       </Link>
       <ul className="grid grid-cols-2 gap-1 p-3">
-        {items.map((l, i) => (
+        {items.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} onClick={onNavigate} className="group flex h-full gap-3 rounded-lg p-3.5 transition-colors hover:bg-off">
-              <span className="font-display text-xs font-semibold text-blue/70 tabular-nums">0{i + 1}</span>
+            <Link href={l.href} onClick={onNavigate} className="group flex h-full items-center gap-3 rounded-lg p-3.5 transition-colors hover:bg-off">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-blue/[0.07] text-blue transition-colors group-hover:bg-blue group-hover:text-white">
+                {createElement(serviceIcons[l.href] ?? Boxes, { "aria-hidden": true, className: "size-[18px]", strokeWidth: 1.75 })}
+              </span>
               <span>
-                <span className="block text-[0.9375rem] font-medium text-ink group-hover:text-blue">{l.label}</span>
-                <span className="mt-0.5 block text-[0.8125rem] text-muted">{l.description}</span>
+                <span className="block whitespace-nowrap text-[0.9375rem] font-medium text-ink group-hover:text-blue">{l.label}</span>
+                <span className="mt-0.5 block whitespace-nowrap text-[0.8125rem] text-muted">{l.description}</span>
               </span>
             </Link>
           </li>
         ))}
       </ul>
     </div>
-  );
-}
-
-function SimplePanel({ links, onNavigate }: { links: NavLink[]; onNavigate: () => void }) {
-  return (
-    <ul className="w-[280px] p-2">
-      {links.map((l) => (
-        <li key={l.href}>
-          <Link href={l.href} onClick={onNavigate} className="group block rounded-lg px-4 py-3 transition-colors hover:bg-off">
-            <span className="block text-[0.9375rem] font-medium text-ink group-hover:text-blue">{l.label}</span>
-            {l.description && <span className="mt-0.5 block text-[0.8125rem] text-muted">{l.description}</span>}
-          </Link>
-        </li>
-      ))}
-    </ul>
   );
 }
 
@@ -312,7 +312,6 @@ function MobileDrawer({ open, onClose, pathname }: { open: boolean; onClose: () 
 
   const groups: { key: MenuKey; label: string; links: (NavLink & { icon?: Parameters<typeof ChannelIcon>[0]["name"] })[] }[] = [
     { key: "services", label: "Services", links: serviceLinks },
-    { key: "resources", label: "Resources", links: resourceLinks },
   ];
 
   return (
@@ -349,6 +348,7 @@ function MobileDrawer({ open, onClose, pathname }: { open: boolean; onClose: () 
                   { href: "/", label: "Home" },
                   { href: "/about", label: "About Us" },
                   { href: "/industries", label: "Industries" },
+                  { href: "/faqs", label: "FAQs" },
                   { href: "/contact", label: "Contact Us" },
                 ].map((l) => (
                   <li key={l.href}>

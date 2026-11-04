@@ -73,7 +73,7 @@ export function WhatsAppButton() {
             aria-label="Back to top"
             tabIndex={showTop ? 0 : -1}
             onClick={() => (window.__lenis ? window.__lenis.scrollTo(0, { duration: 1.6 }) : window.scrollTo({ top: 0, behavior: "smooth" }))}
-            className="group relative flex size-14 items-center justify-center rounded-full bg-navy text-white shadow-[0_8px_24px_-8px_rgba(16,28,48,0.45)] transition-colors duration-300 hover:bg-blue"
+            className="group relative flex size-14 items-center justify-center rounded-full bg-blue text-white shadow-[0_8px_24px_-8px_rgba(16,28,48,0.45)] ring-2 ring-white/90 transition-colors duration-300 hover:bg-blue-dark"
           >
             <ArrowUp aria-hidden className="size-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
             <Tooltip>Back to top</Tooltip>

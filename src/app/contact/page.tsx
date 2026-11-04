@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, MapPin, MessageSquareText } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { Breadcrumbs } from "@/components/sections/common";
 import { Eyebrow } from "@/components/ui/primitives";
 import { LineReveal } from "@/components/ui/Reveal";
 import { ChannelIcon } from "@/components/ui/SocialIcon";
@@ -25,8 +24,7 @@ export default function ContactPage() {
   return (
     <section className="bg-white pt-28 pb-[clamp(4rem,9vw,9rem)] md:pt-36">
       <div className="container-x">
-        <Breadcrumbs items={[{ label: "Contact Us" }]} />
-        <div className="mt-6 grid gap-10 lg:grid-cols-12">
+        <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Eyebrow>Get in touch</Eyebrow>
             <h1 className="text-display mt-3">

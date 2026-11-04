@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Mail, Phone } from "lucide-react";
 import { QuoteForm } from "@/components/forms/QuoteForm";
-import { Breadcrumbs } from "@/components/sections/common";
 import { Button, Eyebrow, WhatsAppIcon } from "@/components/ui/primitives";
 import { LineReveal } from "@/components/ui/Reveal";
 import { mailtoUrl, site, telUrl, whatsappUrl } from "@/data/site";
@@ -19,8 +18,7 @@ export default async function QuotePage({ searchParams }: { searchParams: Promis
   return (
     <section className="bg-white pt-28 pb-[clamp(4rem,9vw,9rem)] md:pt-36">
       <div className="container-x">
-        <Breadcrumbs items={[{ label: "Get a Quote" }]} />
-        <div className="mt-12 grid gap-14 lg:grid-cols-12">
+        <div className="grid gap-14 lg:grid-cols-12">
           <aside className="lg:col-span-4">
             <div className="lg:sticky lg:top-32">
               <Eyebrow>Get a quotation</Eyebrow>
@@ -31,19 +29,6 @@ export default async function QuotePage({ searchParams }: { searchParams: Promis
                 Share your shipment details and we&apos;ll prepare a clear, cost-effective quotation — reviewed by people with decades of
                 freight forwarding experience.
               </p>
-
-              <div className="mt-10 rounded-xl bg-off p-6">
-                <p className="font-display font-semibold text-ink">For an accurate quote, include:</p>
-                <ul className="mt-4 space-y-2.5 text-[0.9375rem] text-muted">
-                  {["What the cargo is and how it's packed", "Origin and destination (city and country)", "Approximate weight and volume", "When the cargo will be ready"].map((t) => (
-                    <li key={t} className="flex gap-3">
-                      <span aria-hidden className="mt-2.5 h-px w-4 shrink-0 bg-blue" />
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-4 text-[0.8125rem] text-muted">Not sure about every field? Send what you have — we&apos;ll follow up.</p>
-              </div>
 
               <div className="mt-8 space-y-3 text-[0.9375rem]">
                 <a href={mailtoUrl} className="flex items-center gap-3 text-ink hover:text-blue">
@@ -66,9 +51,10 @@ export default async function QuotePage({ searchParams }: { searchParams: Promis
                 </Button>
               </div>
             </div>
+
           </aside>
           <div className="lg:col-span-7 lg:col-start-6">
-            <div className="rounded-2xl border border-line p-6 md:p-10">
+            <div className="rounded-[1.75rem] bg-gray-100 p-6 md:p-10">
               <QuoteForm defaultService={defaultService} />
             </div>
           </div>

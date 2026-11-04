@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { createElement } from "react";
 import { Accordion } from "@/components/ui/Accordion";
 import { Button, Eyebrow, WhatsAppIcon } from "@/components/ui/primitives";
-import { Breadcrumbs } from "@/components/sections/common";
 import { SectionNav } from "@/components/sections/SectionNav";
 import { faqIcon } from "@/components/sections/faqIcons";
 import { LineReveal } from "@/components/ui/Reveal";
@@ -27,8 +26,7 @@ export default function FaqsPage() {
     <>
       <section className="bg-white pt-28 md:pt-36">
         <div className="container-x">
-          <Breadcrumbs items={[{ label: "Resources" }, { label: "FAQs" }]} />
-          <div className="mt-8 grid gap-6 rounded-[1.75rem] bg-gray-100 px-6 py-10 md:px-12 md:py-14 lg:grid-cols-12 lg:items-end">
+          <div className="grid gap-6 rounded-[1.75rem] bg-gray-100 px-6 py-10 md:px-12 md:py-14 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-12">
               <Eyebrow>Help centre</Eyebrow>
               <h1 className="mt-3 font-display text-[clamp(2.25rem,5.6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-ink">

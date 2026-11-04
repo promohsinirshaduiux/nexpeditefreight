@@ -21,7 +21,7 @@ import {
 import { Button, Eyebrow } from "@/components/ui/primitives";
 import { CountUp, LineReveal, Reveal, ScrubWords } from "@/components/ui/Reveal";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
-import { Breadcrumbs, CtaBand, SectionHeading } from "@/components/sections/common";
+import { CtaBand, SectionHeading } from "@/components/sections/common";
 import { coreValues, differentiators, site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -54,8 +54,7 @@ export default function AboutPage() {
       {/* 01 — Editorial hero */}
       <section className="bg-white pt-28 md:pt-36">
         <div className="container-x">
-          <Breadcrumbs items={[{ label: "About Us" }]} />
-          <Eyebrow className="mt-12">About Nexpedite Freight</Eyebrow>
+          <Eyebrow>About Nexpedite Freight</Eyebrow>
           <h1 className="mt-3 font-display text-[clamp(2.5rem,6.6vw,6.25rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">
             <LineReveal lines={["New company.", "Established experience."]} />
           </h1>

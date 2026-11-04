@@ -1,49 +1,8 @@
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { Button, Eyebrow, WhatsAppLogo } from "@/components/ui/primitives";
 import { LineReveal, Reveal } from "@/components/ui/Reveal";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
-import { site, whatsappUrl } from "@/data/site";
-
-export type Crumb = { label: string; href?: string };
-
-export function Breadcrumbs({ items, tone = "light" }: { items: Crumb[]; tone?: "light" | "dark" }) {
-  const all: Crumb[] = [{ label: "Home", href: "/" }, ...items];
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: all.map((c, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: c.label,
-      ...(c.href ? { item: `${site.url}${c.href}` } : {}),
-    })),
-  };
-  const base = tone === "dark" ? "text-white/70" : "text-muted";
-  const current = tone === "dark" ? "text-white" : "text-ink";
-  return (
-    <nav aria-label="Breadcrumb" className="text-[0.8125rem]">
-      <ol className={`flex flex-wrap items-center gap-1.5 ${base}`}>
-        {all.map((c, i) => (
-          <li key={c.label} className="flex items-center gap-1.5">
-            {i > 0 && <ChevronRight aria-hidden className="size-3.5 opacity-60" />}
-            {c.href && i < all.length - 1 ? (
-              <Link href={c.href} className="link-underline hover:opacity-100">
-                {c.label}
-              </Link>
-            ) : (
-              <span aria-current="page" className={current}>
-                {c.label}
-              </span>
-            )}
-          </li>
-        ))}
-      </ol>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-    </nav>
-  );
-}
+import { whatsappUrl } from "@/data/site";
 
 /** Editorial inner-page hero: large type over a cinematic image band. */
 export function PageHero({
@@ -52,7 +11,6 @@ export function PageHero({
   intro,
   image,
   imageAlt,
-  crumbs,
   children,
   introWide,
 }: {
@@ -61,7 +19,6 @@ export function PageHero({
   intro: string;
   image?: string;
   imageAlt?: string;
-  crumbs: Crumb[];
   children?: ReactNode;
   /** Give the intro the right half of the row (shorter, wider lines) instead of the last third. */
   introWide?: boolean;
@@ -69,8 +26,7 @@ export function PageHero({
   return (
     <section className="relative bg-white pt-28 md:pt-36">
       <div className="container-x">
-        <Breadcrumbs items={crumbs} />
-        <div className="mt-10 grid gap-10 md:mt-14 lg:grid-cols-12 lg:items-end">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className={introWide ? "lg:col-span-6" : "lg:col-span-8"}>
             <Eyebrow>{eyebrow}</Eyebrow>
             <h1 className="text-display mt-3 text-ink">
@@ -104,6 +60,7 @@ export function SectionHeading({
   title,
   intro,
   action,
+  introWide,
   align = "left",
   tone = "light",
   className = "",
@@ -113,6 +70,8 @@ export function SectionHeading({
   intro?: string;
   /** Optional call to action shown under the intro (split layout). */
   action?: ReactNode;
+  /** Split layout: give the intro the right half of the row instead of the last third. */
+  introWide?: boolean;
   align?: "left" | "split";
   tone?: "light" | "dark";
   className?: string;
@@ -122,16 +81,16 @@ export function SectionHeading({
   if (align === "split") {
     return (
       <div className={`grid gap-8 lg:grid-cols-12 lg:items-end ${className}`}>
-        <div className="lg:col-span-7">
+        <div className={introWide ? "lg:col-span-6" : "lg:col-span-7"}>
           <Eyebrow tone={tone === "dark" ? "cyan" : "blue"}>{eyebrow}</Eyebrow>
           <h2 className={`text-h2 mt-3 ${titleColor}`}>
             <LineReveal lines={title} />
           </h2>
         </div>
-        {intro && (
-          <Reveal delay={0.15} className="lg:col-span-4 lg:col-start-9">
-            <p className={`text-lead ${introColor}`}>{intro}</p>
-            {action && <div className="mt-6">{action}</div>}
+        {(intro || action) && (
+          <Reveal delay={0.15} className={`${introWide ? "lg:col-span-6 lg:col-start-7" : "lg:col-span-4 lg:col-start-9"} ${intro ? "" : "lg:justify-self-end"}`}>
+            {intro && <p className={`text-lead ${introColor}`}>{intro}</p>}
+            {action && <div className={intro ? "mt-6" : ""}>{action}</div>}
           </Reveal>
         )}
       </div>

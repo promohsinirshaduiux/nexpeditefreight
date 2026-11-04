@@ -32,7 +32,6 @@ export default function IndustriesPage() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: "Industries" }]}
         introWide
         eyebrow="Sectors we support"
         title={["Industries", "we serve."]}

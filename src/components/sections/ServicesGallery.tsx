@@ -41,7 +41,6 @@ export function ServicesGallery() {
                 alt={s.imageAlt}
                 className="absolute inset-0 size-full -z-10 object-cover transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-[1.07]" loading="lazy" decoding="async" />
               <span aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent transition-opacity duration-700 group-hover:opacity-90" />
-              <span className="absolute left-7 top-7 font-display text-[4.5rem] font-semibold leading-none tracking-[-0.05em] text-white/20 md:left-9 md:top-8">{s.n}</span>
               <span className="absolute right-7 top-7 flex size-11 items-center justify-center rounded-full border border-white/40 transition-all duration-500 group-hover:rotate-45 group-hover:border-white group-hover:bg-white group-hover:text-navy md:right-9 md:top-9">
                 <ArrowUpRight aria-hidden className="size-4" />
               </span>

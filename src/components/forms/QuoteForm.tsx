@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { cargoTypeOptions, quoteSchema, serviceOptions, type QuoteData, type QuoteInput } from "@/lib/schemas";
 import { Consent, Fieldset, Honeypot, SelectField, TextArea, TextField } from "./fields";
 import { FormStatus, SuccessPanel, postForm, type SubmitState } from "./FormStatus";
@@ -50,11 +50,11 @@ export function QuoteForm({ defaultService }: { defaultService?: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="relative space-y-10" aria-label="Quotation request">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="relative space-y-6" aria-label="Quotation request">
       <Honeypot {...register("company_website")} />
 
       <Fieldset n="01" legend="Your details">
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-x-4 gap-y-3 md:grid-cols-2">
           <TextField label="Full name" required autoComplete="name" {...register("fullName")} error={errors.fullName?.message} />
           <TextField label="Company name" autoComplete="organization" {...register("companyName")} error={errors.companyName?.message} />
           <TextField label="Email address" required type="email" autoComplete="email" {...register("email")} error={errors.email?.message} />
@@ -71,7 +71,7 @@ export function QuoteForm({ defaultService }: { defaultService?: string }) {
       </Fieldset>
 
       <Fieldset n="02" legend="Shipment">
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-x-4 gap-y-3 md:grid-cols-2">
           <SelectField label="Service required" required options={serviceOptions} placeholder="Choose a service" {...register("service")} error={errors.service?.message} className="md:col-span-2" />
           <TextField label="Origin country / city" required placeholder="e.g. Karachi, Pakistan" {...register("origin")} error={errors.origin?.message} />
           <TextField label="Destination country / city" required placeholder="e.g. Hamburg, Germany" {...register("destination")} error={errors.destination?.message} />
@@ -79,7 +79,7 @@ export function QuoteForm({ defaultService }: { defaultService?: string }) {
       </Fieldset>
 
       <Fieldset n="03" legend="Cargo">
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-x-4 gap-y-3 md:grid-cols-2">
           <SelectField label="Cargo type" options={cargoTypeOptions} placeholder="Choose a cargo type" {...register("cargoType")} error={errors.cargoType?.message} />
           <TextField label="Shipment readiness date" type="date" {...register("readyDate")} error={errors.readyDate?.message} />
           <TextField label="Estimated weight" placeholder="e.g. 4,500 kg" {...register("weight")} error={errors.weight?.message} />
@@ -103,7 +103,7 @@ export function QuoteForm({ defaultService }: { defaultService?: string }) {
         </div>
       </Fieldset>
 
-      <div className="space-y-6 border-t border-line pt-8" data-whatsapp-avoid>
+      <div className="space-y-6 border-t border-gray-200 pt-6" data-whatsapp-avoid>
         <Consent {...register("consent")} error={errors.consent?.message}>
           I agree that Nexpedite Freight may use these details to respond to my request, as described in the{" "}
           <Link href="/privacy-policy" className="text-blue underline">
@@ -115,7 +115,7 @@ export function QuoteForm({ defaultService }: { defaultService?: string }) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="group inline-flex min-h-13 w-full items-center justify-center gap-3 rounded-lg bg-blue px-8 py-4 font-medium text-white transition-colors hover:bg-blue-dark disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+          className="inline-flex min-h-13 w-full items-center justify-center gap-3 rounded-lg bg-navy px-8 py-4 text-center font-medium text-white transition-colors hover:bg-navy-deep disabled:cursor-wait disabled:opacity-70"
         >
           {isSubmitting ? (
             <>
@@ -123,7 +123,7 @@ export function QuoteForm({ defaultService }: { defaultService?: string }) {
             </>
           ) : (
             <>
-              Request my quotation <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
+              Request my quotation
             </>
           )}
         </button>

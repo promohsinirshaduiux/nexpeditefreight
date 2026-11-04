@@ -10,7 +10,8 @@ export type Service = {
   imageAlt: string;
   metaTitle: string;
   metaDescription: string;
-  capabilities: { title: string; text: string }[];
+  /** `image` (optional) fades in behind the card on hover. */
+  capabilities: { title: string; text: string; image?: string }[];
   steps: { title: string; text: string }[];
   why: string[];
   suitedFor: string[];
@@ -34,10 +35,10 @@ export const services: Service[] = [
     metaDescription:
       "FCL and LCL ocean freight from Pakistan with port-to-port and door-to-door options, careful carrier selection and hands-on shipment coordination.",
     capabilities: [
-      { title: "FCL and LCL", text: "Full Container Load for dedicated volumes, Less than Container Load when you only need part of a box." },
-      { title: "Port-to-port and door-to-door", text: "Choose the scope that suits you — from quay to quay, or from your premises to your consignee's." },
-      { title: "Carrier and routing selection", text: "Carriers and routings chosen carefully to balance cost against transit time for each shipment." },
-      { title: "Shipment tracking and coordination", text: "One team keeps track of your container and coordinates every handover along the way." },
+      { title: "FCL and LCL", text: "Full Container Load for dedicated volumes, Less than Container Load when you only need part of a box.", image: "/images/cap-ocean-fcl-lcl.jpg" },
+      { title: "Port-to-port and door-to-door", text: "Choose the scope that suits you — from quay to quay, or from your premises to your consignee's.", image: "/images/cap-ocean-door.jpg" },
+      { title: "Carrier and routing selection", text: "Carriers and routings chosen carefully to balance cost against transit time for each shipment.", image: "/images/cap-ocean-routing.jpg" },
+      { title: "Shipment tracking and coordination", text: "One team keeps track of your container and coordinates every handover along the way.", image: "/images/cap-ocean-tracking.jpg" },
     ],
     steps: [
       { title: "Cargo review", text: "We confirm volume, weight, commodity and readiness date to decide between FCL and LCL." },
@@ -50,7 +51,7 @@ export const services: Service[] = [
       "Direct contact with the person managing your container",
       "Quotations that balance freight cost with reliability",
     ],
-    suitedFor: ["Textile & apparel exports", "Machinery and heavy goods", "FMCG and general cargo"],
+    suitedFor: ["Textile & apparel exports", "Machinery and heavy goods", "FMCG and general cargo", "Leather goods", "Sports goods", "Chemicals"],
     related: ["customs-clearance", "road-transportation", "warehousing-distribution"],
     quoteLabel: "Request an ocean freight quote",
   },
