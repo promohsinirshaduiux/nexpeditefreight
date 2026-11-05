@@ -344,23 +344,12 @@ function MobileDrawer({ open, onClose, pathname }: { open: boolean; onClose: () 
             </div>
             <nav aria-label="Mobile" data-lenis-prevent className="flex-1 overflow-y-auto px-5 py-4">
               <ul className="divide-y divide-line">
+                {/* Same order as the desktop menu: Home, About Us, Services, Industries, FAQs, Contact Us. */}
                 {[
                   { href: "/", label: "Home" },
                   { href: "/about", label: "About Us" },
-                  { href: "/industries", label: "Industries" },
-                  { href: "/faqs", label: "FAQs" },
-                  { href: "/contact", label: "Contact Us" },
                 ].map((l) => (
-                  <li key={l.href}>
-                    <Link
-                      href={l.href}
-                      onClick={onClose}
-                      aria-current={pathname === l.href ? "page" : undefined}
-                      className="flex min-h-14 items-center font-display text-xl font-semibold text-ink aria-[current=page]:text-blue"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
+                  <DrawerLink key={l.href} {...l} active={pathname === l.href} onClose={onClose} />
                 ))}
                 {groups.map((g) => {
                   const expanded = group === g.key;
@@ -410,6 +399,13 @@ function MobileDrawer({ open, onClose, pathname }: { open: boolean; onClose: () 
                     </li>
                   );
                 })}
+                {[
+                  { href: "/industries", label: "Industries" },
+                  { href: "/faqs", label: "FAQs" },
+                  { href: "/contact", label: "Contact Us" },
+                ].map((l) => (
+                  <DrawerLink key={l.href} {...l} active={pathname === l.href} onClose={onClose} />
+                ))}
               </ul>
             </nav>
             <div className="border-t border-line p-5">
@@ -422,5 +418,20 @@ function MobileDrawer({ open, onClose, pathname }: { open: boolean; onClose: () 
         </div>
       )}
     </AnimatePresence>
+  );
+}
+
+function DrawerLink({ href, label, active, onClose }: { href: string; label: string; active: boolean; onClose: () => void }) {
+  return (
+    <li>
+      <Link
+        href={href}
+        onClick={onClose}
+        aria-current={active ? "page" : undefined}
+        className="flex min-h-14 items-center font-display text-xl font-semibold text-ink aria-[current=page]:text-blue"
+      >
+        {label}
+      </Link>
+    </li>
   );
 }

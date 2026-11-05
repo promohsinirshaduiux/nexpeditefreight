@@ -110,7 +110,7 @@ export default function HomePage() {
             <ParallaxImage
               src="/images/terminal-aerial.jpg"
               alt="Aerial view of an organised container terminal yard"
-              className="aspect-[4/5] rounded-xl"
+              className="aspect-[4/3] rounded-xl sm:aspect-[4/5]"
             />
             <Reveal delay={0.5} className="glass-light absolute -bottom-6 right-4 max-w-[19rem] rounded-[1.25rem] p-4 md:-right-8 md:p-5">
               <div className="flex items-center gap-4">

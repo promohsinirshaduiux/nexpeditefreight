@@ -57,7 +57,7 @@ export default function ServicesPage() {
             {services.map((s, i) => (
               <Reveal as="li" key={s.slug} delay={(i % 3) * 0.08}>
                 <Link href={`/services/${s.slug}`} className="group block">
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-xl sm:aspect-[4/5]">
                     <img
                       src={s.image}
                       srcSet={srcSetFor(s.image)}
@@ -145,7 +145,7 @@ export default function ServicesPage() {
 
       <section className="section-y bg-white">
         <div className="container-x grid gap-12 lg:grid-cols-12 lg:items-center">
-          <Reveal y={40} className="relative aspect-[4/5] overflow-hidden rounded-xl lg:col-span-5">
+          <Reveal y={40} className="relative aspect-[4/3] overflow-hidden rounded-xl lg:col-span-5 lg:aspect-[4/5]">
             <img src="/images/port-dawn.jpg" alt="Port cranes and a docked container ship at dawn" className="absolute inset-0 size-full object-cover" loading="lazy" decoding="async" />
           </Reveal>
           <div className="lg:col-span-6 lg:col-start-7">

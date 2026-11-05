@@ -18,7 +18,7 @@ export default async function QuotePage({ searchParams }: { searchParams: Promis
   return (
     <section className="bg-white pt-28 pb-[clamp(4rem,9vw,9rem)] md:pt-36">
       <div className="container-x">
-        <div className="grid gap-14 lg:grid-cols-12">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-12">
           <aside className="lg:col-span-4">
             <div className="lg:sticky lg:top-32">
               <Eyebrow>Get a quotation</Eyebrow>

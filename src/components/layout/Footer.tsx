@@ -110,9 +110,9 @@ export function Footer() {
             )}
           </div>
 
-          <div className="grid gap-10 sm:grid-cols-3 lg:col-span-7 lg:col-start-6">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-7 lg:col-start-6">
             <FooterCol title="Company" links={quick} />
-            <FooterCol title="Services" links={serviceLinks.map((l) => ({ label: l.label === "Services Overview" ? "All Services" : l.label, href: l.href }))} />
+            <FooterCol title="Services" className="row-span-2 sm:row-span-1" links={serviceLinks.map((l) => ({ label: l.label === "Services Overview" ? "All Services" : l.label, href: l.href }))} />
             <FooterCol title="Resources" links={resourceLinks} />
           </div>
         </div>
@@ -165,9 +165,9 @@ export function Footer() {
 }
 
 /** Link column: each link slides right on hover and reveals a small arrow. */
-function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+function FooterCol({ title, links, className = "" }: { title: string; links: { label: string; href: string }[]; className?: string }) {
   return (
-    <div>
+    <div className={className}>
       <h2 className="eyebrow text-muted">{title}</h2>
       <ul className="mt-5 space-y-3 text-[0.9375rem]">
         {links.map((l) => (

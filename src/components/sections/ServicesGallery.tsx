@@ -13,7 +13,7 @@ export function ServicesGallery() {
   return (
     <section data-hscroll className="relative overflow-hidden bg-navy text-white lg:h-screen">
       <div className="flex h-full flex-col justify-center py-20 lg:py-0">
-        <div data-hscroll-track className="flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:px-10 lg:snap-none lg:gap-6 lg:overflow-visible lg:pb-0 lg:pl-[max(2.5rem,calc((100vw-1280px)/2))] lg:pr-[10vw]">
+        <div data-hscroll-track className="flex snap-x snap-mandatory scroll-px-5 items-stretch gap-5 overflow-x-auto px-5 pb-4 md:scroll-px-10 [scrollbar-width:none] md:px-10 lg:snap-none lg:gap-6 lg:overflow-visible lg:pb-0 lg:pl-[max(2.5rem,calc((100vw-1280px)/2))] lg:pr-[10vw]">
           <div className="flex w-[82vw] shrink-0 snap-start flex-col justify-between sm:w-[420px] lg:w-[460px] lg:pr-10">
             <div>
               <Eyebrow tone="cyan">What we do</Eyebrow>

@@ -24,7 +24,7 @@ export default function ContactPage() {
   return (
     <section className="bg-white pt-28 pb-[clamp(4rem,9vw,9rem)] md:pt-36">
       <div className="container-x">
-        <div className="grid gap-10 lg:grid-cols-12">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Eyebrow>Get in touch</Eyebrow>
             <h1 className="text-display mt-3">
