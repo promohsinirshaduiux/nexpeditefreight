@@ -280,7 +280,7 @@ export default function HomePage() {
             title={["Six clear stages,", "one point of contact."]}
             intro="From your first message to final delivery, you always know what happens next — and who is handling it."
           />
-          <div className="mt-16 md:mt-24">
+          <div className="mt-10 md:mt-24">
             <ProcessTimeline />
           </div>
         </div>
@@ -289,7 +289,7 @@ export default function HomePage() {
       {/* 08 — Global reach */}
       <section className="section-y bg-white">
         <div className="container-x">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
+          <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-12">
             <div className="lg:col-span-7">
               <Eyebrow>Reach</Eyebrow>
               <h2 className="text-h2 mt-3">

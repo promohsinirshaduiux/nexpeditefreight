@@ -137,7 +137,7 @@ export default function ServicesPage() {
               </Button>
             }
           />
-          <div className="mt-16 md:mt-24">
+          <div className="mt-10 md:mt-24">
             <ProcessTimeline tone="dark" />
           </div>
         </div>

@@ -17,10 +17,10 @@ export function ServicesGallery() {
         <div className="mb-10 px-5 md:px-10 lg:hidden">
           <Eyebrow tone="cyan">What we do</Eyebrow>
           <h2 className="text-h2 mt-3">
-            <LineReveal lines={["Logistics", "solutions for", "every journey."]} />
+            <LineReveal lines={["Logistics solutions for every journey."]} />
           </h2>
           <Reveal delay={0.2}>
-            <p className="text-lead mt-6 max-w-xl text-white/70">
+            <p className="text-lead mt-6 text-white/70">
               Six core services, planned together and managed by the same team — so your cargo moves without gaps between providers.
             </p>
           </Reveal>

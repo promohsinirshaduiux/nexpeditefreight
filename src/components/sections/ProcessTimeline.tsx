@@ -24,6 +24,20 @@ export function ProcessTimeline({ tone = "dark" }: { tone?: "dark" | "light" }) 
   const [hovered, setHovered] = useState(false);
   const root = useRef<HTMLDivElement>(null);
 
+  // Phone: end the vertical rail at the last step's dot rather than below its text.
+  const list = useRef<HTMLOListElement>(null);
+  const [railEnd, setRailEnd] = useState<number | null>(null);
+  useEffect(() => {
+    const ol = list.current;
+    const last = ol?.lastElementChild as HTMLElement | null;
+    if (!ol || !last) return;
+    const measure = () => setRailEnd(last.offsetHeight - 13);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(last);
+    return () => ro.disconnect();
+  }, []);
+
   // Only play while the timeline is on screen and motion is allowed.
   useEffect(() => {
     const el = root.current;
@@ -64,14 +78,16 @@ export function ProcessTimeline({ tone = "dark" }: { tone?: "dark" | "light" }) 
   return (
     <div ref={root} className="relative" onPointerEnter={() => setHovered(true)} onPointerLeave={() => setHovered(false)}>
       {/* Rail and travelling bar (vertical on phones, horizontal from lg) */}
-      <div aria-hidden className={`process-rail absolute left-[11px] top-3 bottom-3 w-px lg:left-0 lg:top-[13px] lg:bottom-auto lg:h-px ${dark ? "bg-white/20" : "bg-line"}`}>
+      <div aria-hidden className={`process-rail absolute left-[11px] top-3 bottom-[var(--rail-end,0.75rem)] w-px lg:left-0 lg:top-[13px] lg:bottom-auto lg:h-px ${dark ? "bg-white/20" : "bg-line"}`}
+        style={railEnd === null ? undefined : ({ "--rail-end": `${railEnd}px` } as CSSProperties)}
+      >
         <span
           className={`process-bar absolute left-0 top-0 w-px ease-linear lg:h-px ${dark ? "bg-white" : "bg-blue"}`}
           style={barStyle}
         />
       </div>
 
-      <ol className="grid gap-10 lg:grid-cols-6 lg:gap-6">
+      <ol ref={list} className="grid gap-10 lg:grid-cols-6 lg:gap-6">
         {processSteps.map((s, i) => {
           const Icon = icons[i];
           const isActive = i === active;
