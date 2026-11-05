@@ -76,7 +76,7 @@ function ServiceHero({ s }: { s: Service }) {
     <section className="bg-white pt-28 md:pt-36">
       <div className="container-x">
         <p className="eyebrow text-blue">{s.title}</p>
-        <h1 className="mt-3 font-display text-[clamp(2.25rem,5.4vw,5rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">
+        <h1 className="mt-3 font-display text-[clamp(2.25rem,5.4vw,5rem)] font-semibold leading-[1.02] tracking-[-0.045em] text-ink">
           <LineReveal hero lines={headlineLines(s.headline)} />
         </h1>
       </div>

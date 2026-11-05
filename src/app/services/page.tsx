@@ -32,7 +32,7 @@ export default function ServicesPage() {
       <section className="bg-white pt-28 md:pt-36">
         <div className="container-x">
           <Eyebrow>Our services</Eyebrow>
-          <h1 className="mt-3 font-display text-[clamp(2.5rem,6.6vw,6.25rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">
+          <h1 className="mt-3 font-display text-[clamp(2.5rem,6.6vw,6.25rem)] font-semibold leading-[1.02] tracking-[-0.045em] text-ink">
             <LineReveal hero lines={["Six services.", "One accountable team."]} />
           </h1>
         </div>

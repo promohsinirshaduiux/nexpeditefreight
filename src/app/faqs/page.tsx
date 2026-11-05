@@ -29,7 +29,7 @@ export default function FaqsPage() {
           <div className="grid gap-6 rounded-[1.75rem] bg-gray-100 px-6 py-10 md:px-12 md:py-14 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-12">
               <Eyebrow>Help centre</Eyebrow>
-              <h1 className="mt-3 font-display text-[clamp(2.25rem,5.6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-ink">
+              <h1 className="mt-3 font-display text-[clamp(2.25rem,5.6vw,5rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ink">
                 <LineReveal hero lines={["Frequently Asked Questions?"]} />
               </h1>
             </div>

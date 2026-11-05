@@ -48,7 +48,7 @@ export default function HomePage() {
                   ))}
                 </p>
               </Reveal>
-              <h1 className="mt-3 max-w-5xl font-display text-[clamp(3rem,8vw,6.75rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
+              <h1 className="mt-3 max-w-5xl font-display text-[clamp(3rem,8vw,6.75rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
                 <SplitChars hero lines={["Freight forwarding.", "Handled personally."]} delay={0.15} />
               </h1>
             </div>

@@ -55,7 +55,8 @@
    Content is visible by default. `html.motion-ready` (set in <head> only when
    motion is allowed) hides reveal targets until Effects.tsx marks them `.in`. */
 
-.line-mask { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+/* Extra room below each line so descenders (g, y, p) are not clipped under tight leading. */
+.line-mask { display: block; overflow: hidden; padding-bottom: 0.28em; margin-bottom: -0.28em; }
 .line-inner { display: block; }
 .char { display: inline-block; }
 
@@ -346,13 +347,13 @@ html.lenis, html.lenis body { height: auto; }
 
 @utility text-display {
   font-size: clamp(2.75rem, 6.4vw, 5.5rem);
-  line-height: 0.98;
+  line-height: 1.04;
   letter-spacing: -0.035em;
 }
 
 @utility text-h2 {
   font-size: clamp(2.125rem, 4.2vw, 3.75rem);
-  line-height: 1.04;
+  line-height: 1.1;
   letter-spacing: -0.03em;
 }
 

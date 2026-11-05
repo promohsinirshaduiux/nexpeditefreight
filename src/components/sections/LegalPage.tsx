@@ -12,7 +12,7 @@ export function LegalPage({ title, label, sections }: { title: string; label: st
         <div className="container-x">
           <div className="rounded-[1.75rem] bg-gray-100 px-6 py-10 md:px-12 md:py-14">
             <Eyebrow>{label}</Eyebrow>
-            <h1 className="mt-3 font-display text-[clamp(2.25rem,5.6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-ink">{title}</h1>
+            <h1 className="mt-3 font-display text-[clamp(2.25rem,5.6vw,5rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ink">{title}</h1>
             <p role="note" className="mt-8 rounded-lg border border-[#e8c96b] bg-[#fdf8e7] px-5 py-4 text-[0.9375rem] text-[#5c4708]">
               <strong className="font-semibold">Draft for review.</strong> This document is a structured draft prepared for Nexpedite Freight and
               has not been approved by a legal professional. Items in [square brackets] require confirmation before publication.

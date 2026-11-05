@@ -22,7 +22,7 @@ export default async function QuotePage({ searchParams }: { searchParams: Promis
           <aside className="lg:col-span-4">
             <div className="lg:sticky lg:top-32">
               <Eyebrow>Get a quotation</Eyebrow>
-              <h1 className="mt-3 font-display text-[clamp(2.5rem,5vw,4.25rem)] font-semibold leading-[1] tracking-[-0.035em]">
+              <h1 className="mt-3 font-display text-[clamp(2.5rem,5vw,4.25rem)] font-semibold leading-[1.04] tracking-[-0.035em]">
                 <LineReveal hero lines={["Tell us what", "you're shipping."]} />
               </h1>
               <p className="text-lead mt-6 text-muted">
