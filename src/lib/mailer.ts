@@ -12,10 +12,11 @@ export function mailConfigured() {
 export async function sendMail(opts: { subject: string; text: string; html: string; replyTo?: string }) {
   const port = Number(process.env.SMTP_PORT ?? 587);
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
+    host: process.env.SMTP_HOST?.trim(),
     port,
     secure: port === 465,
-    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+    // Trim: a space or line break pasted into the dashboard value makes the login fail.
+    auth: { user: process.env.SMTP_USER?.trim(), pass: process.env.SMTP_PASS?.trim() },
   });
   await transporter.sendMail({
     from: process.env.MAIL_FROM ?? process.env.SMTP_USER,

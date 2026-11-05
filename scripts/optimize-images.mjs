@@ -66,7 +66,8 @@ const logoBox = {
   height: Math.min(srcMeta.height - Math.max(0, box.top - pad), box.height + pad * 2),
 };
 const trimmed = await sharp(src).extract(logoBox).png().toBuffer();
-await sharp(trimmed).toFile(path.join(brand, "logo.png"));
+// Served at most ~200px wide (x3 for sharp screens), so 600px keeps it small.
+await sharp(trimmed).resize({ width: 600 }).png({ palette: true, quality: 90, compressionLevel: 9 }).toFile(path.join(brand, "logo.png"));
 console.log("logo", logoBox.width, logoBox.height);
 
 // Icon: the globe mark is the first run of inked columns, ending at the gap before the wordmark.
@@ -79,9 +80,9 @@ const markOnly = await sharp(trimmed).extract({ left: 0, top: 0, width: end + 1,
 const markBox = (await inkColumnsAndBox(markOnly)).box;
 await sharp(markOnly)
   .extract(markBox)
-  .resize(460, 460, { fit: "contain", background: "#ffffff" })
-  .extend({ top: 26, bottom: 26, left: 26, right: 26, background: "#ffffff" })
+  .resize(170, 170, { fit: "contain", background: "#ffffff" })
+  .extend({ top: 11, bottom: 11, left: 11, right: 11, background: "#ffffff" })
   .flatten({ background: "#ffffff" })
-  .png()
+  .png({ palette: true, quality: 90, compressionLevel: 9 })
   .toFile(path.join(brand, "icon.png"));
 console.log("icon", markBox.width, markBox.height);

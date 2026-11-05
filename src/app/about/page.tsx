@@ -23,6 +23,7 @@ import { CountUp, LineReveal, Reveal, ScrubWords } from "@/components/ui/Reveal"
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { CtaBand, SectionHeading } from "@/components/sections/common";
 import { coreValues, differentiators, site } from "@/data/site";
+import { srcSetFor } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "About Us — New Company, Established Experience",
@@ -56,14 +57,14 @@ export default function AboutPage() {
         <div className="container-x">
           <Eyebrow>About Nexpedite Freight</Eyebrow>
           <h1 className="mt-3 font-display text-[clamp(2.5rem,6.6vw,6.25rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">
-            <LineReveal lines={["New company.", "Established experience."]} />
+            <LineReveal hero lines={["New company.", "Established experience."]} />
           </h1>
         </div>
         <div className="container-x mt-14 grid gap-5 md:mt-20 md:grid-cols-12">
-          <Reveal y={40} className="relative aspect-[4/3] overflow-hidden rounded-xl md:col-span-8 md:aspect-auto md:min-h-[520px]">
-            <img src="/images/port-dawn.jpg" alt="Gantry cranes and a container ship at a port at dawn" className="absolute inset-0 size-full object-cover" fetchPriority="high" decoding="async" />
+          <Reveal hero y={40} className="relative aspect-[4/3] overflow-hidden rounded-xl md:col-span-8 md:aspect-auto md:min-h-[520px]">
+            <img src="/images/port-dawn.jpg" srcSet={srcSetFor("/images/port-dawn.jpg")} sizes="(max-width: 767px) 100vw, 66vw" alt="Gantry cranes and a container ship at a port at dawn" className="absolute inset-0 size-full object-cover" fetchPriority="high" decoding="async" />
           </Reveal>
-          <Reveal y={40} delay={0.1} className="flex flex-col justify-between gap-10 rounded-xl bg-navy p-8 text-white md:col-span-4 md:p-10">
+          <Reveal hero y={40} delay={0.1} className="flex flex-col justify-between gap-10 rounded-xl bg-navy p-8 text-white md:col-span-4 md:p-10">
             <p className="eyebrow text-cyan">Quick facts</p>
             <dl className="space-y-6">
               {[

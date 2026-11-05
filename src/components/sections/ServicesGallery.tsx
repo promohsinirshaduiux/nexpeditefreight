@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Eyebrow } from "@/components/ui/primitives";
 import { LineReveal, Reveal } from "@/components/ui/Reveal";
 import { services } from "@/data/services";
+import { srcSetFor } from "@/lib/images";
 
 /**
  * Pinned horizontal gallery of all six services. On desktop the section pins
@@ -38,6 +39,8 @@ export function ServicesGallery() {
             >
               <img
                 src={s.image}
+                srcSet={srcSetFor(s.image)}
+                sizes="(max-width: 640px) 100vw, 40vw"
                 alt={s.imageAlt}
                 className="absolute inset-0 size-full -z-10 object-cover transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-[1.07]" loading="lazy" decoding="async" />
               <span aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent transition-opacity duration-700 group-hover:opacity-90" />

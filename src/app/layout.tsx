@@ -38,7 +38,7 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-const motionBoot = `(function(){var d=document.documentElement;try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('motion-ready');if(sessionStorage.getItem('nx-seen'))d.classList.add('nx-seen');}catch(e){}setTimeout(function(){if(!window.__nxEffects){d.classList.remove('motion-ready');}},4000);})();`;
+const motionBoot = `(function(){var d=document.documentElement;try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('motion-ready');if(sessionStorage.getItem('nx-seen')||matchMedia('(max-width: 767px)').matches)d.classList.add('nx-seen');}catch(e){}setTimeout(function(){if(!window.__nxEffects){d.classList.remove('motion-ready');}},4000);})();`;
 
 const orgJsonLd = {
   "@context": "https://schema.org",

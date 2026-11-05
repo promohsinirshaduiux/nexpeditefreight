@@ -7,6 +7,7 @@ import { CountUp, LineReveal, Reveal } from "@/components/ui/Reveal";
 import { CtaBand, SectionHeading } from "@/components/sections/common";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
 import { services } from "@/data/services";
+import { srcSetFor } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "Freight Forwarding Services — Ocean, Air, Road, Customs & More",
@@ -32,12 +33,12 @@ export default function ServicesPage() {
         <div className="container-x">
           <Eyebrow>Our services</Eyebrow>
           <h1 className="mt-3 font-display text-[clamp(2.5rem,6.6vw,6.25rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">
-            <LineReveal lines={["Six services.", "One accountable team."]} />
+            <LineReveal hero lines={["Six services.", "One accountable team."]} />
           </h1>
         </div>
         <div className="container-x mt-14 md:mt-20">
-          <Reveal y={40} className="relative aspect-[4/3] overflow-hidden rounded-xl md:aspect-[24/10]">
-            <img src="/images/containers-abstract.jpg" alt="Close-up of stacked shipping container doors" className="absolute inset-0 size-full object-cover" fetchPriority="high" decoding="async" />
+          <Reveal hero y={40} className="relative aspect-[4/3] overflow-hidden rounded-xl md:aspect-[24/10]">
+            <img src="/images/containers-abstract.jpg" srcSet={srcSetFor("/images/containers-abstract.jpg")} sizes="100vw" alt="Close-up of stacked shipping container doors" className="absolute inset-0 size-full object-cover" fetchPriority="high" decoding="async" />
           </Reveal>
         </div>
       </section>
@@ -48,6 +49,7 @@ export default function ServicesPage() {
             align="split"
             eyebrow="Overview"
             title={["Choose a service,", "or combine them."]}
+            hero
             introWide
             intro="Most shipments use more than one service. We connect them — booking, documentation, clearance, storage and delivery — so nothing falls between providers."
           />
@@ -58,6 +60,8 @@ export default function ServicesPage() {
                   <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
                     <img
                       src={s.image}
+                      srcSet={srcSetFor(s.image)}
+                      sizes="(max-width: 767px) 100vw, 33vw"
                       alt={s.imageAlt}
                       className="absolute inset-0 size-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-105" loading="lazy" decoding="async" />
                     <span className="absolute left-5 top-5 flex size-12 items-center justify-center rounded-full border border-white/60 bg-white/90 text-blue backdrop-blur transition-colors duration-300 group-hover:border-blue group-hover:bg-blue group-hover:text-white">

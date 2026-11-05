@@ -28,7 +28,7 @@ export default function ContactPage() {
           <div className="lg:col-span-5">
             <Eyebrow>Get in touch</Eyebrow>
             <h1 className="text-display mt-3">
-              <LineReveal lines={["Let's talk", "freight."]} />
+              <LineReveal hero lines={["Let's talk", "freight."]} />
             </h1>
             <p className="text-lead mt-8 max-w-md text-muted">
               We&apos;d welcome the chance to discuss your freight forwarding needs. You&apos;ll hear back from the people who will handle

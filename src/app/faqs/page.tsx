@@ -30,7 +30,7 @@ export default function FaqsPage() {
             <div className="lg:col-span-12">
               <Eyebrow>Help centre</Eyebrow>
               <h1 className="mt-3 font-display text-[clamp(2.25rem,5.6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-ink">
-                <LineReveal lines={["Frequently Asked Questions?"]} />
+                <LineReveal hero lines={["Frequently Asked Questions?"]} />
               </h1>
             </div>
             <p className="text-lead text-muted lg:col-span-12">

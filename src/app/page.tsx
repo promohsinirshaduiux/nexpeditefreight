@@ -18,10 +18,19 @@ export default function HomePage() {
       <section className="relative bg-white px-3 pt-[72px] md:px-5 md:pt-20">
         <div className="relative isolate flex min-h-[calc(100svh-84px)] flex-col overflow-hidden rounded-2xl bg-navy text-white md:min-h-[max(680px,calc(100svh-100px))]">
           <div data-hero-media className="absolute inset-0 -z-10 origin-bottom">
-            <img
-              src="/images/hero-port.jpg"
-              alt="Container ship leaving a commercial port at blue hour"
-              className="absolute inset-0 size-full hero-zoom object-cover object-[70%_center]" fetchPriority="high" decoding="async" />
+            {/* Phones get a light portrait crop; larger screens pick 1280 or 2200 wide. */}
+            <picture>
+              <source media="(max-width: 767px)" srcSet="/images/hero-port-mobile.jpg" />
+              <img
+                src="/images/hero-port.jpg"
+                srcSet="/images/hero-port-1280.jpg 1280w, /images/hero-port.jpg 2200w"
+                sizes="100vw"
+                alt="Container ship leaving a commercial port at blue hour"
+                className="absolute inset-0 size-full hero-zoom object-cover object-[70%_center] max-md:object-center"
+                fetchPriority="high"
+                decoding="async"
+              />
+            </picture>
           </div>
           <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep/90 via-transparent to-navy-deep/40" />
           <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-deep/70 via-transparent to-transparent" />
@@ -298,7 +307,7 @@ export default function HomePage() {
           <div className="relative mt-14 md:mt-20">
             <LoopVideo
               src="/videos/ocean-reach.mp4"
-              poster="/images/ocean-aerial.jpg"
+              poster="/images/ocean-aerial-1280.jpg"
               label="Aerial footage of a container ship crossing open ocean"
               className="aspect-[4/3] rounded-xl md:aspect-[21/9]"
             />

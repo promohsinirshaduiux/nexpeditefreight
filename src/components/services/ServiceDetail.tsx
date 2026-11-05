@@ -32,6 +32,7 @@ import { Button, Eyebrow } from "@/components/ui/primitives";
 import { LineReveal, Reveal } from "@/components/ui/Reveal";
 import { CtaBand, SectionHeading } from "@/components/sections/common";
 import { getService, services, type Service } from "@/data/services";
+import { srcSetFor } from "@/lib/images";
 
 export function serviceMetadata(slug: string): Metadata {
   const s = getService(slug);
@@ -76,12 +77,12 @@ function ServiceHero({ s }: { s: Service }) {
       <div className="container-x">
         <p className="eyebrow text-blue">{s.title}</p>
         <h1 className="mt-3 font-display text-[clamp(2.25rem,5.4vw,5rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-ink">
-          <LineReveal lines={headlineLines(s.headline)} />
+          <LineReveal hero lines={headlineLines(s.headline)} />
         </h1>
       </div>
       <div className="container-x mt-14 md:mt-20">
-        <Reveal y={40} className="relative aspect-[4/3] overflow-hidden rounded-xl md:aspect-[24/10]">
-          <img src={s.image} alt={s.imageAlt} className="absolute inset-0 size-full object-cover" fetchPriority="high" decoding="async" />
+        <Reveal hero y={40} className="relative aspect-[4/3] overflow-hidden rounded-xl md:aspect-[24/10]">
+          <img src={s.image} srcSet={srcSetFor(s.image)} sizes="100vw" alt={s.imageAlt} className="absolute inset-0 size-full object-cover" fetchPriority="high" decoding="async" />
         </Reveal>
       </div>
     </section>
@@ -93,7 +94,7 @@ function Introduction({ s, variant }: { s: Service; variant: Variant }) {
     <section className="section-y bg-white">
       <div className="container-x">
         <Eyebrow>Overview</Eyebrow>
-        <Reveal className="mt-5">
+        <Reveal hero className="mt-5">
           <p className="font-display text-[clamp(1.5rem,2.6vw,2.375rem)] font-medium leading-[1.25] tracking-[-0.02em] text-ink">{s.intro}</p>
           <div className="mt-8 flex flex-wrap gap-2">
             {s.suitedFor.map((t) => (
@@ -223,7 +224,7 @@ function Related({ s }: { s: Service }) {
             <Reveal as="li" key={r.slug} delay={i * 0.08}>
               <Link href={`/services/${r.slug}`} className="group block">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
-                  <img src={r.image} alt={r.imageAlt} className="absolute inset-0 size-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-105" loading="lazy" decoding="async" />
+                  <img src={r.image} srcSet={srcSetFor(r.image)} sizes="(max-width: 767px) 100vw, 33vw" alt={r.imageAlt} className="absolute inset-0 size-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-105" loading="lazy" decoding="async" />
                 </div>
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>

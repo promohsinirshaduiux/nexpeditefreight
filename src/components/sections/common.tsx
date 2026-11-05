@@ -30,10 +30,10 @@ export function PageHero({
           <div className={introWide ? "lg:col-span-6" : "lg:col-span-8"}>
             <Eyebrow>{eyebrow}</Eyebrow>
             <h1 className="text-display mt-3 text-ink">
-              <LineReveal lines={title} />
+              <LineReveal hero lines={title} />
             </h1>
           </div>
-          <Reveal delay={0.2} className={`lg:pb-3 ${introWide ? "lg:col-span-6 lg:col-start-7" : "lg:col-span-4"}`}>
+          <Reveal hero delay={0.2} className={`lg:pb-3 ${introWide ? "lg:col-span-6 lg:col-start-7" : "lg:col-span-4"}`}>
             <p className="text-lead text-muted">{intro}</p>
             {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
           </Reveal>
@@ -61,6 +61,7 @@ export function SectionHeading({
   intro,
   action,
   introWide,
+  hero,
   align = "left",
   tone = "light",
   className = "",
@@ -72,6 +73,8 @@ export function SectionHeading({
   action?: ReactNode;
   /** Split layout: give the intro the right half of the row instead of the last third. */
   introWide?: boolean;
+  /** Sits on or just below the first screen: animate in on load instead of waiting for scripts. */
+  hero?: boolean;
   align?: "left" | "split";
   tone?: "light" | "dark";
   className?: string;
@@ -84,11 +87,11 @@ export function SectionHeading({
         <div className={introWide ? "lg:col-span-6" : "lg:col-span-7"}>
           <Eyebrow tone={tone === "dark" ? "cyan" : "blue"}>{eyebrow}</Eyebrow>
           <h2 className={`text-h2 mt-3 ${titleColor}`}>
-            <LineReveal lines={title} />
+            <LineReveal hero={hero} lines={title} />
           </h2>
         </div>
         {(intro || action) && (
-          <Reveal delay={0.15} className={`${introWide ? "lg:col-span-6 lg:col-start-7" : "lg:col-span-4 lg:col-start-9"} ${intro ? "" : "lg:justify-self-end"}`}>
+          <Reveal hero={hero} delay={0.15} className={`${introWide ? "lg:col-span-6 lg:col-start-7" : "lg:col-span-4 lg:col-start-9"} ${intro ? "" : "lg:justify-self-end"}`}>
             {intro && <p className={`text-lead ${introColor}`}>{intro}</p>}
             {action && <div className={intro ? "mt-6" : ""}>{action}</div>}
           </Reveal>
@@ -100,7 +103,7 @@ export function SectionHeading({
     <div className={`max-w-3xl ${className}`}>
       <Eyebrow tone={tone === "dark" ? "cyan" : "blue"}>{eyebrow}</Eyebrow>
       <h2 className={`text-h2 mt-3 ${titleColor}`}>
-        <LineReveal lines={title} />
+        <LineReveal hero={hero} lines={title} />
       </h2>
       {intro && (
         <Reveal delay={0.15}>
