@@ -38,7 +38,7 @@ export default function HomePage() {
           <div data-hero-fade className="container-x flex flex-1 flex-col justify-between gap-16 pt-16 pb-10 md:pt-24 md:pb-16">
             <div>
               <Reveal hero y={16} delay={0.1}>
-                <p className="eyebrow flex flex-wrap items-center gap-x-2 gap-y-1 text-cyan">
+                <p className="eyebrow flex flex-wrap items-center gap-x-2 gap-y-1 text-white">
                   {["Your Cargo", "Our Commitment", "Delivered"].map((part, i) => (
                     <span key={part} className="flex items-center gap-x-2">
                       {i > 0 && <span aria-hidden className="size-1 rounded-full bg-white" />}
@@ -49,7 +49,7 @@ export default function HomePage() {
                 </p>
               </Reveal>
               <h1 className="mt-3 max-w-5xl font-display text-[clamp(3rem,8vw,6.75rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
-                <SplitChars hero lines={["Freight forwarding.", "Handled personally."]} delay={0.15} />
+                <SplitChars hero lines={["Your freight,", "our commitment."]} delay={0.15} />
               </h1>
             </div>
             <div className="grid gap-8 border-t border-white/20 pt-8 md:grid-cols-12 md:items-end">
@@ -63,7 +63,7 @@ export default function HomePage() {
                 <Button href="/get-a-quote" variant="light">
                   Get a Quotation
                 </Button>
-                <Button href="/services" variant="ghost-light">
+                <Button href="/services" variant="sky">
                   Explore Our Services
                 </Button>
               </Reveal>

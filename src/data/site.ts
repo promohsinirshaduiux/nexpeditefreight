@@ -15,7 +15,7 @@ export const site = {
   description:
     "Nexpedite Freight is a Pakistan-based freight forwarding company offering ocean, air and road freight, customs clearance, warehousing and project cargo — backed by more than 30 years of founder experience.",
   // Production domain used for canonical URLs, sitemap and Open Graph.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.nexpeditefreight.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nexpeditefreight.com",
 
   contact: {
     email: "info@nexpeditefreight.com",

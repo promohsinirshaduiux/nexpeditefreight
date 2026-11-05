@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     url: "/",
     title: "Nexpedite Freight — Freight Forwarding in Pakistan",
     description: site.description,
-    images: [{ url: "/images/hero-port.jpg", width: 1920, height: 1086, alt: "Container ship leaving port at dusk" }],
+    images: [{ url: "/images/og.jpg", width: 1200, height: 630, alt: "Nexpedite Freight — Your Freight Partner" }],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", images: ["/images/og.jpg"] },
 };
 
 export const viewport: Viewport = {

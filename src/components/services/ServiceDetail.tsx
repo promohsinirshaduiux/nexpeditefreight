@@ -40,7 +40,7 @@ export function serviceMetadata(slug: string): Metadata {
     title: s.metaTitle,
     description: s.metaDescription,
     alternates: { canonical: `/services/${s.slug}` },
-    openGraph: { title: `${s.title} | Nexpedite Freight`, description: s.metaDescription, url: `/services/${s.slug}`, images: [s.image] },
+    openGraph: { title: `${s.title} | Nexpedite Freight`, description: s.metaDescription, url: `/services/${s.slug}`, images: [{ url: "/images/og.jpg", width: 1200, height: 630, alt: "Nexpedite Freight — Your Freight Partner" }] },
   };
 }
 

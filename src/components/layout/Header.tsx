@@ -54,7 +54,7 @@ export function Header() {
       >
         <div className="container-x flex h-[72px] items-center justify-between gap-6 md:h-20">
           <Link href="/" aria-label="Nexpedite Freight home" className="shrink-0">
-            <Logo priority />
+            <Logo priority className="lg:h-12 lg:w-auto" />
           </Link>
 
           <nav aria-label="Main" className="hidden lg:block">
