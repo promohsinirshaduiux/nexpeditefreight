@@ -65,7 +65,7 @@ export default function ContactPage() {
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="eyebrow block text-muted">Office</span>
-                    <span title={site.contact.officeAddress} className="mt-1 block truncate font-display text-lg font-semibold text-ink md:text-xl">{site.contact.officeAddress}</span>
+                    <span className="mt-1 block line-clamp-2 font-display text-lg font-semibold leading-snug text-ink md:text-xl">{site.contact.officeAddress}</span>
                   </span>
                   <ArrowUpRight aria-hidden className="size-5 shrink-0 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue" />
                 </a>
