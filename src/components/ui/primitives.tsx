@@ -13,7 +13,7 @@ export function Logo({ className = "", priority = false }: { className?: string;
       fetchPriority={priority ? "high" : "auto"}
       loading={priority ? "eager" : "lazy"}
       decoding="async"
-      className={`h-auto w-[168px] md:w-[196px] ${className}`}
+      className={`h-auto w-[200px] md:w-[220px] ${className}`}
     />
   );
 }

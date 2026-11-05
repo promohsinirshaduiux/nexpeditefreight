@@ -12,9 +12,21 @@ import { srcSetFor } from "@/lib/images";
 export function ServicesGallery() {
   return (
     <section data-hscroll className="relative overflow-hidden bg-navy text-white lg:h-screen">
-      <div className="flex h-full flex-col justify-center py-20 lg:py-0">
+      <div className="flex h-full flex-col justify-center pt-14 pb-20 lg:py-0">
+        {/* Phones and tablets: the intro sits above the swipeable cards. On desktop it is the first panel of the track. */}
+        <div className="mb-10 px-5 md:px-10 lg:hidden">
+          <Eyebrow tone="cyan">What we do</Eyebrow>
+          <h2 className="text-h2 mt-3">
+            <LineReveal lines={["Logistics", "solutions for", "every journey."]} />
+          </h2>
+          <Reveal delay={0.2}>
+            <p className="text-lead mt-6 max-w-xl text-white/70">
+              Six core services, planned together and managed by the same team — so your cargo moves without gaps between providers.
+            </p>
+          </Reveal>
+        </div>
         <div data-hscroll-track className="flex snap-x snap-mandatory scroll-px-5 items-stretch gap-5 overflow-x-auto px-5 pb-4 md:scroll-px-10 [scrollbar-width:none] md:px-10 lg:snap-none lg:gap-6 lg:overflow-visible lg:pb-0 lg:pl-[max(2.5rem,calc((100vw-1280px)/2))] lg:pr-[10vw]">
-          <div className="flex w-[82vw] shrink-0 snap-start flex-col justify-between sm:w-[420px] lg:w-[460px] lg:pr-10">
+          <div className="hidden shrink-0 flex-col justify-between lg:flex lg:w-[460px] lg:pr-10">
             <div>
               <Eyebrow tone="cyan">What we do</Eyebrow>
               <h2 className="text-h2 mt-3">
